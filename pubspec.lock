@@ -81,6 +81,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.6"
+  forme_fields:
+    dependency: "direct main"
+    description:
+      name: forme_fields
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   lints:
     dependency: transitive
     description:

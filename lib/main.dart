@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
 import 'package:forme/forme.dart';
-import 'package:forme_demo/forme_input_chip.dart';
+import 'package:forme_demo/forme_async_chip_input.dart';
 
 import 'cupertino_form.dart';
 import 'forme_chip.dart';
@@ -66,6 +65,7 @@ class MyApp extends StatelessWidget {
         '/FormeCupertinoPicker': (context) => FormeCupertinoPickerScreen(),
         '/MaterialForm': (context) => const MaterialFormScreen(),
         '/CupertinoForm': (context) => const CupertinoFormScreen(),
+        '/FormeAsyncChipInput': (context) => FormeAsyncChipInputScreen(),
       },
     );
   }
@@ -124,9 +124,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   title: FieldLink('FormeCheckbox'),
                 ),
                 ListTile(
-                  title: FieldLink('FormeAutocomplete'),
-                ),
-                ListTile(
                   title: FieldLink('FormeSwitch'),
                 ),
                 ListTile(
@@ -175,6 +172,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 ListTile(
                   title: FieldLink('FormeCupertinoPicker'),
+                ),
+              ],
+            ),
+            ExpansionTile(
+              title: Text(
+                "Forme Fields",
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+              ),
+              children: [
+                ListTile(
+                  title: FieldLink('FormeAutocomplete'),
+                ),
+                ListTile(
+                  title: FieldLink('FormeAsyncChipInput'),
                 ),
               ],
             ),
