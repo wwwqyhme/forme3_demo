@@ -51,6 +51,7 @@ class FormeAutocompleteScreen extends FormeScreen {
                     formeKey: key,
                     name: 'asyncAutocomplete',
                     field: FormeAsyncAutocomplete<String>(
+                      validator: validator,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       decoration: const InputDecoration(labelText: 'Search'),
                       optionsBuilder: asyncSearch,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
-import 'package:forme_demo/forme_async_chip_input.dart';
+import 'package:forme_demo/forme_async_input_chip.dart';
 
 import 'cupertino_form.dart';
 import 'forme_chip.dart';
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
         '/FormeCupertinoPicker': (context) => FormeCupertinoPickerScreen(),
         '/MaterialForm': (context) => const MaterialFormScreen(),
         '/CupertinoForm': (context) => const CupertinoFormScreen(),
-        '/FormeAsyncChipInput': (context) => FormeAsyncChipInputScreen(),
+        '/FormeAsyncInputChip': (context) => FormeAsyncInputChipScreen(),
       },
     );
   }
@@ -185,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   title: FieldLink('FormeAutocomplete'),
                 ),
                 ListTile(
-                  title: FieldLink('FormeAsyncChipInput'),
+                  title: FieldLink('FormeAsyncInputChip'),
                 ),
               ],
             ),
