@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'cupertino_form.dart';
+import 'form/cupertino_form.dart';
 import 'extra/forme_async_input_chip.dart';
 import 'material/forme_chip.dart';
 import 'cupertino/forme_cupertino_slider.dart';
@@ -21,7 +21,7 @@ import 'material/forme_checkbox.dart';
 import 'material/forme_slider.dart';
 import 'material/forme_text_field.dart';
 import 'material/forme_time.dart';
-import 'material_form.dart';
+import 'form/material_form.dart';
 
 void main() {
   runApp(const MyApp());
