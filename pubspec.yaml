@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   forme: ^3.1.8
   forme_fields: ^1.0.3
+  url_launcher: ^6.0.12
 
 dev_dependencies:
   flutter_test:

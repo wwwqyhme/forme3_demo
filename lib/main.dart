@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
 import 'package:forme_demo/forme_async_input_chip.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'cupertino_form.dart';
 import 'forme_chip.dart';
@@ -108,10 +109,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
-          children: const [
-            ExpansionTile(
+          children: [
+            const ExpansionTile(
               title: Text(
                 "Material Field",
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
@@ -146,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-            ExpansionTile(
+            const ExpansionTile(
               title: Text(
                 "Cupertino Field",
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
@@ -175,7 +177,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-            ExpansionTile(
+            const ExpansionTile(
               title: Text(
                 "Forme Fields",
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
@@ -189,7 +191,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-            ExpansionTile(
+            const ExpansionTile(
               title: Text(
                 "Form",
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
@@ -202,6 +204,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   title: FieldLink('CupertinoForm'),
                 ),
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: InkWell(
+                  child: const Text("https://github.com/wwwqyhme/forme3_demo",
+                      style: TextStyle(
+                          fontSize: 16,
+                          decoration: TextDecoration.underline,
+                          color: Colors.blue)),
+                  onTap: () =>
+                      launch('https://github.com/wwwqyhme/forme3_demo')),
             ),
           ],
         ),

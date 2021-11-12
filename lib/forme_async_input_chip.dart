@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forme/forme.dart';
 import 'package:forme_fields/forme_fields.dart';
 
 import 'forme_screen.dart';
@@ -98,6 +99,53 @@ class FormeAsyncInputChipScreen extends FormeScreen {
                     optionsBuilder: optionsBuilder,
                   ),
                   title: 'FormeAsyncInputChip2',
+                ),
+                Example(
+                  formeKey: key,
+                  name: 'asyncInputChip3',
+                  subTitle: 'custom state icon',
+                  field: FormeAsyncInputChip<String>(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: validator,
+                    asyncValidator: asyncValidator,
+                    inputChipBuilder: inputChipBuilder,
+                    decoration: InputDecoration(
+                      labelText: 'FormeAsyncInputChip',
+                      suffixIconConstraints: const BoxConstraints.tightFor(),
+                      suffixIcon: Builder(
+                        builder: (context) {
+                          FormeAsyncInputChipController<String> controller =
+                              key.field('asyncInputChip3');
+                          return Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ValueListenableBuilder<
+                                      FormeAsyncAutocompleteSearchState>(
+                                  valueListenable: controller.stateListenable,
+                                  builder: (context, state, child) {
+                                    return state ==
+                                            FormeAsyncAutocompleteSearchState
+                                                .loading
+                                        ? const CircularProgressIndicator()
+                                        : const SizedBox.shrink();
+                                  }),
+                              ValueListenableBuilder<FormeFieldValidation>(
+                                  valueListenable:
+                                      controller.validationListenable,
+                                  builder: (context, validation, child) {
+                                    return validation.isValidating
+                                        ? const CircularProgressIndicator()
+                                        : const SizedBox.shrink();
+                                  }),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                    name: 'asyncInputChip3',
+                    optionsBuilder: optionsBuilder,
+                  ),
+                  title: 'FormeAsyncInputChip3',
                 ),
               ];
             });
