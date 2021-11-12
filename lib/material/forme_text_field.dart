@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forme/forme.dart';
-import 'package:forme_demo/forme_screen.dart';
 
-import 'exmaple.dart';
+import '../exmaple.dart';
+import '../forme_screen.dart';
 
 class FormeTextFieldScreen extends FormeScreen {
   static const String name = 'textField';

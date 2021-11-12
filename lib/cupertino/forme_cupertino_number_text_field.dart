@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forme/forme.dart';
 
-import 'cupertino_exmaple.dart';
-import 'forme_screen.dart';
+import '../cupertino_exmaple.dart';
+import '../forme_screen.dart';
 
 class FormeCupertinoNumberTextFieldScreen extends FormeScreen {
   FormeCupertinoNumberTextFieldScreen({Key? key})

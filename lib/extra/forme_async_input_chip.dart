@@ -4,8 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forme/forme.dart';
 import 'package:forme_fields/forme_fields.dart';
 
-import 'forme_screen.dart';
-import 'exmaple.dart';
+import '../exmaple.dart';
+import '../forme_screen.dart';
 
 class FormeAsyncInputChipScreen extends FormeScreen {
   static Future<Iterable<String>> optionsBuilder(TextEditingValue value) =>

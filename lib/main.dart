@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
-import 'package:forme_demo/forme_async_input_chip.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'cupertino_form.dart';
-import 'forme_chip.dart';
-import 'forme_cupertino_slider.dart';
-import 'forme_cupertino_text_field.dart';
-import 'forme_list_tile.dart';
-import 'forme_cupertino_date_time_field.dart';
-import 'forme_cupertino_number_text_field.dart';
-import 'forme_cupertino_picker.dart';
-import 'forme_cupertino_segmented_control.dart';
-import 'forme_cupertino_switch.dart';
-import 'forme_dropdown.dart';
-import 'forme_number_field.dart';
-import 'forme_switch.dart';
-import 'forme_autocomplete.dart';
-import 'forme_checkbox.dart';
-import 'forme_slider.dart';
-import 'forme_text_field.dart';
-import 'forme_time.dart';
+import 'extra/forme_async_input_chip.dart';
+import 'material/forme_chip.dart';
+import 'cupertino/forme_cupertino_slider.dart';
+import 'cupertino/forme_cupertino_text_field.dart';
+import 'material/forme_list_tile.dart';
+import 'cupertino/forme_cupertino_date_time_field.dart';
+import 'cupertino/forme_cupertino_number_text_field.dart';
+import 'cupertino/forme_cupertino_picker.dart';
+import 'cupertino/forme_cupertino_segmented_control.dart';
+import 'cupertino/forme_cupertino_switch.dart';
+import 'material/forme_dropdown.dart';
+import 'material/forme_number_field.dart';
+import 'material/forme_switch.dart';
+import 'extra/forme_autocomplete.dart';
+import 'material/forme_checkbox.dart';
+import 'material/forme_slider.dart';
+import 'material/forme_text_field.dart';
+import 'material/forme_time.dart';
 import 'material_form.dart';
 
 void main() {

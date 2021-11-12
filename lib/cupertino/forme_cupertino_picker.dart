@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:forme/forme.dart';
 import 'package:forme_demo/forme_screen.dart';
 
-import 'cupertino_exmaple.dart';
+import '../cupertino_exmaple.dart';
+import '../forme_screen.dart';
 
 class FormeCupertinoPickerScreen extends FormeScreen {
   FormeCupertinoPickerScreen({Key? key})

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forme/forme.dart';
 
-import 'forme_screen.dart';
-import 'exmaple.dart';
+import '../exmaple.dart';
+import '../forme_screen.dart';
 
 class FormeDropdownScreen extends FormeScreen {
   FormeDropdownScreen({Key? key})
