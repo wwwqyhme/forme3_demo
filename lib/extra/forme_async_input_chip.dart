@@ -50,6 +50,17 @@ class FormeAsyncInputChipScreen extends FormeScreen {
                   field: FormeAsyncInputChip<String>(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: validator,
+                    onInitialed: (f) {
+                      FormeAsyncInputChipController controller =
+                          f as FormeAsyncInputChipController;
+                      controller.optionsViewVisibeStateListenable
+                          .addListener(() {
+                        if (controller.isOptionsViewVisible) {
+                          SystemChannels.textInput
+                              .invokeMethod<Object>('TextInput.hide');
+                        }
+                      });
+                    },
                     asyncValidator: asyncValidator,
                     inputChipBuilder: inputChipBuilder,
                     decoration: const InputDecoration(
