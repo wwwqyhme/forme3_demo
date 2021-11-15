@@ -50,6 +50,23 @@ class FormeCheckboxScreen extends FormeScreen {
                   ),
                   title: 'FormeCheckbox2',
                   subTitle: 'nullable',
+                ),
+                Example(
+                  formeKey: key,
+                  name: 'checkbox3',
+                  field: FormeCheckboxTile(
+                    selected: true,
+                    tristate: true,
+                    title: const Text('Animate Slowly'),
+                    secondary: const Icon(Icons.hourglass_empty),
+                    name: 'checkbox3',
+                    validator: (f, v) {
+                      if (!v!) return 'check me pls!';
+                      return null;
+                    },
+                  ),
+                  title: 'FormeCheckboxTile',
+                  subTitle: 'list tile like',
                 )
               ];
             });
