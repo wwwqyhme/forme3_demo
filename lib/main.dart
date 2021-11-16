@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
+import 'package:forme_demo/extra/forme_pin_code_text_field.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'extra/forme_rating_bar.dart';
 import 'form/cupertino_form.dart';
 import 'extra/forme_async_input_chip.dart';
 import 'material/forme_chip.dart';
@@ -67,6 +69,8 @@ class MyApp extends StatelessWidget {
         '/MaterialForm': (context) => const MaterialFormScreen(),
         '/CupertinoForm': (context) => const CupertinoFormScreen(),
         '/FormeAsyncInputChip': (context) => FormeAsyncInputChipScreen(),
+        '/FormeRatingBar': (context) => FormeRatingBarScreen(),
+        '/FormePinCodeTextField': (context) => FormePinCodeTextFieldScreen(),
       },
     );
   }
@@ -179,7 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const ExpansionTile(
               title: Text(
-                "Forme Fields",
+                "Extra Fields",
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
               children: [
@@ -188,6 +192,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 ListTile(
                   title: FieldLink('FormeAsyncInputChip'),
+                ),
+                ListTile(
+                  title: FieldLink('FormeRatingBar'),
+                ),
+                ListTile(
+                  title: FieldLink('FormePinCodeTextField'),
                 ),
               ],
             ),

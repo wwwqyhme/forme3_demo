@@ -56,6 +56,16 @@ class Example extends StatelessWidget {
             formeKey.field(name).readOnly = false;
           },
           child: const Text('editable')),
+      TextButton(
+          onPressed: () {
+            formeKey.field(name).enabled = true;
+          },
+          child: const Text('enabled')),
+      TextButton(
+          onPressed: () {
+            formeKey.field(name).enabled = false;
+          },
+          child: const Text('disabled')),
       Tooltip(
         message: 'will not work if no validators',
         textStyle: const TextStyle(color: Colors.orangeAccent),
@@ -115,6 +125,14 @@ class Example extends StatelessWidget {
                   valueListenable: controller.readOnlyListenable,
                   builder: (context, value, child) {
                     return Text('read-only state changed , current:$value');
+                  });
+            }),
+            Builder(builder: (context) {
+              final FormeFieldController controller = formeKey.field(name);
+              return ValueListenableBuilder<bool>(
+                  valueListenable: controller.enabledListenable,
+                  builder: (context, value, child) {
+                    return Text('enable state changed , current:$value');
                   });
             }),
             const SizedBox(height: 5),

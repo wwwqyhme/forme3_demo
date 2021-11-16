@@ -48,6 +48,16 @@ class CupertinoExample extends StatelessWidget {
           child: const Text('editable')),
       CupertinoButton(
           onPressed: () {
+            formeKey.field(name).enabled = true;
+          },
+          child: const Text('enabled')),
+      CupertinoButton(
+          onPressed: () {
+            formeKey.field(name).enabled = false;
+          },
+          child: const Text('disabled')),
+      CupertinoButton(
+          onPressed: () {
             formeKey.field(name).validate(quietly: false);
           },
           child: const Text('validate')),
@@ -101,6 +111,14 @@ class CupertinoExample extends StatelessWidget {
                   valueListenable: controller.readOnlyListenable,
                   builder: (context, value, child) {
                     return Text('read-only state changed , current:$value');
+                  });
+            }),
+            Builder(builder: (context) {
+              final FormeFieldController controller = formeKey.field(name);
+              return ValueListenableBuilder<bool>(
+                  valueListenable: controller.enabledListenable,
+                  builder: (context, value, child) {
+                    return Text('enable state changed , current:$value');
                   });
             }),
             const SizedBox(height: 5),
