@@ -44,7 +44,10 @@ class FormeCheckboxScreen extends FormeScreen {
                     tristate: true,
                     name: 'checkbox2',
                     validator: (f, v) {
-                      if (!v!) return 'check me pls!';
+                      if (v == null) {
+                        return null;
+                      }
+                      if (!v) return 'check me pls!';
                       return null;
                     },
                   ),
@@ -61,7 +64,10 @@ class FormeCheckboxScreen extends FormeScreen {
                     secondary: const Icon(Icons.hourglass_empty),
                     name: 'checkbox3',
                     validator: (f, v) {
-                      if (!v!) return 'check me pls!';
+                      if (v == null) {
+                        return null;
+                      }
+                      if (!v) return 'check me pls!';
                       return null;
                     },
                   ),
