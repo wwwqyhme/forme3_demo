@@ -9,10 +9,14 @@ typedef FieldBuilder = List<Widget> Function(
 class FormeScreen extends StatefulWidget {
   final String title;
   final FieldBuilder builder;
+  final VoidCallback? onInitState;
+  final VoidCallback? onDispose;
   const FormeScreen({
     Key? key,
     required this.title,
     required this.builder,
+    this.onDispose,
+    this.onInitState,
   }) : super(key: key);
 
   @override
@@ -21,6 +25,18 @@ class FormeScreen extends StatefulWidget {
 
 class _FormeScreenState extends State<FormeScreen> {
   final FormeKey key = FormeKey();
+
+  @override
+  void initState() {
+    super.initState();
+    widget.onInitState?.call();
+  }
+
+  @override
+  void dispose() {
+    widget.onDispose?.call();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

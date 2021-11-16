@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:forme/forme.dart';
 import 'package:forme_fields/forme_fields.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -7,10 +11,17 @@ import '../exmaple.dart';
 import '../forme_screen.dart';
 
 class FormePinCodeTextFieldScreen extends FormeScreen {
+  static late StreamController<ErrorAnimationType> errorController;
   FormePinCodeTextFieldScreen({Key? key})
       : super(
             key: key,
             title: 'FormePinCodeTextField',
+            onInitState: () {
+              errorController = StreamController<ErrorAnimationType>();
+            },
+            onDispose: () {
+              errorController.close();
+            },
             builder: (context, key) {
               return [
                 Example(
@@ -28,6 +39,7 @@ class FormePinCodeTextFieldScreen extends FormeScreen {
                     name: 'pin',
                     length: 6,
                     obscureText: false,
+                    errorAnimationController: errorController,
                     animationType: AnimationType.fade,
                     pinTheme: PinTheme(
                       shape: PinCodeFieldShape.box,
@@ -36,16 +48,23 @@ class FormePinCodeTextFieldScreen extends FormeScreen {
                       fieldWidth: 40,
                       activeFillColor: Colors.white,
                     ),
+                    validator: (f, v) =>
+                        v == null ? 'pls input pin code' : null,
+                    decorator: const FormeInputDecoratorBuilder(
+                        decoration: InputDecoration(labelText: 'Pin Code')),
                     animationDuration: const Duration(milliseconds: 300),
                     backgroundColor: Colors.blue.shade50,
                     enableActiveFill: true,
-                    beforeTextPaste: (text) {
-                      print("Allowing to paste $text");
-                      //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-                      //but you can show anything you want here, like your pop up saying wrong paste format or etc
-                      return true;
+                    autovalidateMode: AutovalidateMode.always,
+                    asyncValidator: (f, v) {
+                      return Future.delayed(const Duration(milliseconds: 1500),
+                          () {
+                        if (v != null) {
+                          errorController.add(ErrorAnimationType.shake);
+                          return 'invalid pin code';
+                        }
+                      });
                     },
-                    dialogConfig: DialogConfig(dialogContent: "??"),
                   ),
                   subTitle: 'Example1',
                   title: 'FormePinCodeTextField',
