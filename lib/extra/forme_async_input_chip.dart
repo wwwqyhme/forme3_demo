@@ -33,7 +33,7 @@ class FormeAsyncInputChipScreen extends FormeScreen {
     return value.length < 2 ? 'invalid' : null;
   }
 
-  static Future<String?> asyncValidator(controller, List value) {
+  static Future<String?> asyncValidator(controller, List value, isValid) {
     return Future.delayed(const Duration(milliseconds: 600), () {
       return value.length > 3 ? 'invalid' : null;
     });

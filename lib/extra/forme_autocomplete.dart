@@ -25,7 +25,7 @@ class FormeAutocompleteScreen extends FormeScreen {
   }
 
   static Future<String?> asyncValidator(
-      FormeFieldController controller, String? value) {
+      FormeFieldController controller, String? value, isValid) {
     return Future.delayed(const Duration(milliseconds: 500),
         () => value == '0' ? null : 'pls select 0');
   }

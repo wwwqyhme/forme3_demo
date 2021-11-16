@@ -74,7 +74,7 @@ class FormeCupertinoTextFieldScreen extends FormeScreen {
                         }
                         return null;
                       },
-                      asyncValidator: (f, v) {
+                      asyncValidator: (f, v, isValid) {
                         return Future.delayed(
                             const Duration(milliseconds: 1500), () {
                           if (v.length < 8) {
