@@ -199,6 +199,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ListTile(
                   title: FieldLink('FormePinCodeTextField'),
                 ),
+                ListTile(
+                  title: FieldLink('FormeIntlPhoneNumberField'),
+                ),
               ],
             ),
             const ExpansionTile(
