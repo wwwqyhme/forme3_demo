@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:forme/forme.dart';
 import 'package:forme_demo/extra/forme_pin_code_text_field.dart';
+import 'package:forme_demo/extra/forme_spin_number_field.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'extra/forme_rating_bar.dart';
@@ -71,6 +71,7 @@ class MyApp extends StatelessWidget {
         '/FormeAsyncInputChip': (context) => FormeAsyncInputChipScreen(),
         '/FormeRatingBar': (context) => FormeRatingBarScreen(),
         '/FormePinCodeTextField': (context) => FormePinCodeTextFieldScreen(),
+        '/FormeSpinNumberField': (context) => FormeSpinNumberFieldScreen(),
       },
     );
   }
@@ -95,8 +96,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  FormeKey key = FormeKey();
-  int index = 0;
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -199,6 +203,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ListTile(
                   title: FieldLink('FormePinCodeTextField'),
                 ),
+                ListTile(
+                  title: FieldLink('FormeSpinNumberField'),
+                )
               ],
             ),
             const ExpansionTile(
