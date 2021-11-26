@@ -1,6 +1,12 @@
+import 'dart:async';
+import 'dart:math';
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
+import 'package:decimal/decimal.dart';
 import 'package:forme_fields/forme_fields.dart';
 
 class MaterialFormScreen extends StatefulWidget {
@@ -11,184 +17,234 @@ class MaterialFormScreen extends StatefulWidget {
 
 class _MaterialFormScreenState extends State<MaterialFormScreen> {
   final FormeKey key = FormeKey();
+  final User user = User();
 
+  final List<FormeListTileItem<String>> items = [
+    FormeListTileItem(
+      title: const Text('Cooking'),
+      data: 'Cooking',
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+    ),
+    FormeListTileItem(
+      title: const Text('Traveling'),
+      data: 'Traveling',
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+    ),
+    FormeListTileItem(
+      title: const Text('Hiking'),
+      data: 'Hiking',
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: const Text('MaterialForm'),
-      ),
+      appBar: AppBar(title: const Text('Profile')),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-          child: Center(
-            // Center is a layout widget. It takes a single child and positions it
-            // in the middle of the parent.
-            child: Forme(
-                key: key,
-                child: Column(
-                  children: [
-                    FormeTextField(
-                      name: 'username',
-                      decoration: const InputDecoration(labelText: 'username'),
-                      onInitialed: (field) {
-                        final TextEditingController controller =
-                            (field as FormeTextFieldController)
-                                .textEditingController;
-                        controller.value = const TextEditingValue(
-                            text: '123',
-                            selection:
-                                TextSelection(baseOffset: 0, extentOffset: 1));
-                      },
-                    ),
-                    FormeNumberField(
-                      name: 'age',
-                      max: 9999,
-                      decimal: 2,
-                      decoration: const InputDecoration(labelText: 'age'),
-                    ),
-                    FormeDateTimeField(
-                      name: 'birthday',
-                      type: FormeDateTimeType.dateTime,
-                      decoration: InputDecoration(
-                          labelText: 'birthday',
-                          suffixIcon: IconButton(
-                            icon: const Icon(Icons.clear),
-                            onPressed: () {
-                              key.field('birthday').value = null;
-                            },
-                          )),
-                    ),
-                    FormeTimeField(
-                        name: 'time',
-                        decoration: const InputDecoration(
-                          labelText: 'time',
-                        )),
-                    FormeDateTimeRangeField(
-                      name: 'range',
-                      decoration:
-                          const InputDecoration(labelText: 'date range'),
-                      validator: (field, v) => '123',
-                    ),
-                    Row(
-                      children: [
-                        FormeSwitch(
-                          name: 'switch',
-                          initialValue: true,
-                        ),
-                        FormeCheckbox(
-                          tristate: true,
-                          name: 'checkbox',
-                        )
-                      ],
-                    ),
-                    FormeRadioGroup<String>(
-                      name: 'radioGroup',
-                      decoration: const InputDecoration(
-                        labelText: 'radioGroup',
-                      ),
-                      items: [
-                        FormeListTileItem(
-                            data: 'first', title: const Text('first')),
-                        FormeListTileItem(
-                            data: 'second', title: const Text('second')),
-                      ],
-                    ),
-                    FormeListTile<String>(
-                      name: 'listTile',
-                      decoration: const InputDecoration(
-                        labelText: 'radioGroup',
-                      ),
-                      items: [
-                        FormeListTileItem(
-                            data: 'first', title: const Text('first')),
-                        FormeListTileItem(
-                            data: 'second', title: const Text('second')),
-                      ],
-                    ),
-                    FormeChoiceChip<String>(
-                      name: 'choiceChip',
-                      items: [
-                        FormeChipItem(
-                            label: const Text('first'), data: 'first'),
-                      ],
-                      decoration: const InputDecoration(
-                        labelText: 'choiceChip',
-                      ),
-                    ),
-                    FormeFilterChip<String>(
-                      name: 'filterChip',
-                      items: [
-                        FormeChipItem(
-                            label: const Text('first'), data: 'first'),
-                      ],
-                      decoration: const InputDecoration(
-                        labelText: 'filterChip',
-                      ),
-                    ),
-                    FormeSlider(
-                      name: 'slider',
-                      min: 1,
-                      max: 100,
-                      decoration: const InputDecoration(
-                        labelText: 'slider',
-                      ),
-                    ),
-                    FormeRangeSlider(
-                      name: 'slider',
-                      min: 1,
-                      max: 100,
-                      decoration: const InputDecoration(
-                        labelText: 'range slider',
-                      ),
-                    ),
-                    FormeDropdownButton<String>(
-                      decoration: const InputDecoration(
-                        labelText: 'Dropdown',
-                      ),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      onValidationChanged: (field, e) {},
-                      asyncValidator: (field, v, isValid) {
-                        return Future.delayed(const Duration(milliseconds: 500),
-                            () {
-                          return 'async validate fail';
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+          child: Forme(
+            onValueChanged: (f, v) {
+              print(
+                  '${f.name} value changed: old value:${f.oldValue}, new value:$v');
+            },
+            onFocusChanged: (f, focus) {
+              print('${f.name} focus changed: is focused:$focus');
+            },
+            onValidationChanged: (f, validation) {
+              print('${f.name} validation changed: current:$validation');
+            },
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            autovalidateByOrder: true,
+            key: key,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                FormeTextField(
+                  name: 'email',
+                  decoration: const InputDecoration(labelText: 'Email'),
+                  validator: (f, v) {
+                    if (!RegExp(
+                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                        .hasMatch(v)) {
+                      return 'Please enter valid email address';
+                    }
+                  },
+                  asyncValidator: (f, v, isValid) {
+                    return Future.delayed(const Duration(milliseconds: 800),
+                        () {
+                      if (v.length < 10) {
+                        return 'email address is exists';
+                      }
+                    });
+                  },
+                  onSaved: (f, v) {
+                    user.email = v;
+                  },
+                ),
+                Builder(
+                  builder: (context) {
+                    return ValueListenableBuilder<FormeFieldValidation>(
+                        valueListenable:
+                            key.field('email').validationListenable,
+                        builder: (context, validation, child) {
+                          if (validation.isValidating) {
+                            return const Text('async validating...');
+                          }
+                          return const SizedBox.shrink();
                         });
-                      },
-                      items: const [
-                        DropdownMenuItem(
-                          value: '123',
-                          child: Text('xxx'),
-                        ),
-                      ],
-                      name: 'dropdown',
+                  },
+                ),
+                FormeTextField(
+                  name: 'firstName',
+                  decoration: const InputDecoration(
+                    labelText: 'First name',
+                  ),
+                  validator: (f, v) {
+                    if (v.isEmpty) {
+                      return 'Please enter your first name';
+                    }
+                  },
+                  onSaved: (f, v) {
+                    user.firstName = v;
+                  },
+                ),
+                FormeTextField(
+                  name: 'lastName',
+                  decoration: const InputDecoration(
+                    labelText: 'Last name',
+                  ),
+                  validator: (f, v) {
+                    if (v.isEmpty) {
+                      return 'Please enter your last name';
+                    }
+                  },
+                  onSaved: (f, v) {
+                    user.lastName = v;
+                  },
+                ),
+                const SizedBox(height: 8),
+                FormeSpinNumberField(
+                  decorator: const FormeInputDecoratorBuilder(
+                    decoration: InputDecoration(
+                      labelText: 'Age',
+                      contentPadding: EdgeInsets.zero,
                     ),
-                    FormeAutocomplete(
-                        initialValue: 'c',
-                        decoration: const InputDecoration(
-                          labelText: 'Autocomplete',
-                        ),
-                        name: 'autocomplete',
-                        optionsBuilder: (TextEditingValue value) {
-                          return ['a', 'b', 'c'];
-                        }),
-                    TextButton(
-                        onPressed: () {
-                          key.reset();
-                        },
-                        child: const Text('reset form')),
+                  ),
+                  initialValue: 14,
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                  min: 14,
+                  max: 99,
+                  name: 'age',
+                  onSaved: (f, v) {
+                    user.age = v.toInt();
+                  },
+                ),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  child: const Text('Subscribe'),
+                ),
+                FormeSwitchTile(
+                  name: 'newsLetter',
+                  title: const Text('Monthly Newsletter'),
+                  initialValue: false,
+                  onSaved: (f, v) {
+                    user.newsletter = v;
+                  },
+                ),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  child: const Text('Interests'),
+                ),
+                FormeListTile<String>(
+                  name: 'interests',
+                  split: 1,
+                  validator: (f, v) {
+                    if (v.isEmpty) {
+                      return 'Please select interest';
+                    }
+                  },
+                  onSaved: (f, v) {
+                    (user.interests..clear()).addAll(v);
+                  },
+                  items: items,
+                ),
+                Builder(
+                  builder: (context) {
+                    return ValueListenableBuilder<FormeFieldValidation>(
+                        valueListenable:
+                            key.field('interests').validationListenable,
+                        builder: (context, validation, child) {
+                          if (validation.isInvalid) {
+                            return Text(validation.error!,
+                                style: const TextStyle(
+                                  color: Colors.redAccent,
+                                ));
+                          }
+                          return const SizedBox.shrink();
+                        });
+                  },
+                ),
+                FormeDropdownButton<String>(
+                  decoration: const InputDecoration(labelText: 'Sex'),
+                  name: 'sex',
+                  items: const [
+                    DropdownMenuItem(
+                      child: Text('male'),
+                      value: 'male',
+                    ),
+                    DropdownMenuItem(
+                      child: Text('female'),
+                      value: 'female',
+                    ),
                   ],
-                )),
+                ),
+                Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16.0, horizontal: 16.0),
+                    child: Builder(
+                      builder: (context) {
+                        return ElevatedButton(
+                          onPressed: () {
+                            key.validate(quietly: false).then((value) {
+                              if (value.isValid &&
+                                  !value.isValueChangedDuringValidation) {
+                                key.save();
+                                print(user);
+                                _showDialog(context);
+                              }
+                            });
+                          },
+                          child: const Text('Save'),
+                        );
+                      },
+                    )),
+              ],
+            ),
           ),
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
+  }
+
+  _showDialog(BuildContext context) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(content: Text('Submitting form')));
+  }
+}
+
+class User {
+  String email = '';
+  String firstName = '';
+  String lastName = '';
+  int age = 14;
+  bool newsletter = false;
+  List<String> interests = [];
+
+  @override
+  String toString() {
+    return '[email:$email,firstName:$firstName,lastName:$lastName,newsletter:$newsletter,interests:$interests]';
   }
 }

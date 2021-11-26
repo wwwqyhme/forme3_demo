@@ -47,7 +47,7 @@ class FormeSwitchScreen extends FormeScreen {
                     secondary: const Icon(Icons.hourglass_empty),
                     name: 'switch2',
                     validator: (f, v) {
-                      if (!v!) return 'check me pls!';
+                      if (!v) return 'check me pls!';
                       return null;
                     },
                   ),
