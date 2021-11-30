@@ -56,10 +56,8 @@ class FormeAsyncInputChipScreen extends FormeScreen {
                         (controller, context, onSelected, options, width) {
                       double keyboardHeight =
                           MediaQuery.of(context).viewInsets.bottom;
-                      RenderBox? box = key
-                          .field('asyncInputChip')
-                          .context
-                          .findRenderObject() as RenderBox;
+                      RenderBox? box =
+                          controller.context.findRenderObject() as RenderBox;
                       double unsafeAreaHeight = keyboardHeight == 0
                           ? MediaQuery.of(context).padding.bottom
                           : 0;

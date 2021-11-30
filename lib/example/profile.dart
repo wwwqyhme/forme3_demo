@@ -1,21 +1,17 @@
 import 'dart:async';
-import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
-import 'package:decimal/decimal.dart';
 import 'package:forme_fields/forme_fields.dart';
 
-class MaterialFormScreen extends StatefulWidget {
-  const MaterialFormScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
   @override
-  State<MaterialFormScreen> createState() => _MaterialFormScreenState();
+  State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _MaterialFormScreenState extends State<MaterialFormScreen> {
+class _ProfileScreenState extends State<ProfileScreen> {
   final FormeKey key = FormeKey();
   final User user = User();
 
@@ -54,7 +50,7 @@ class _MaterialFormScreenState extends State<MaterialFormScreen> {
             onValidationChanged: (f, validation) {
               print('${f.name} validation changed: current:$validation');
             },
-            autovalidateMode: AutovalidateMode.onUserInteraction,
+            autovalidateMode: AutovalidateMode.always,
             autovalidateByOrder: true,
             key: key,
             child: Column(
@@ -64,6 +60,7 @@ class _MaterialFormScreenState extends State<MaterialFormScreen> {
                   name: 'email',
                   decoration: const InputDecoration(labelText: 'Email'),
                   validator: (f, v) {
+                    print('email validate');
                     if (!RegExp(
                             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                         .hasMatch(v)) {
@@ -218,6 +215,19 @@ class _MaterialFormScreenState extends State<MaterialFormScreen> {
                             });
                           },
                           child: const Text('Save'),
+                        );
+                      },
+                    )),
+                Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16.0, horizontal: 16.0),
+                    child: Builder(
+                      builder: (context) {
+                        return ElevatedButton(
+                          onPressed: () {
+                            key.reset();
+                          },
+                          child: const Text('reset'),
                         );
                       },
                     )),

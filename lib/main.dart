@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:forme_demo/example/dynamic_fields.dart';
 import 'package:forme_demo/extra/forme_pin_code_text_field.dart';
 import 'package:forme_demo/extra/forme_spin_number_field.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'example/associate_validation.dart';
 import 'extra/forme_rating_bar.dart';
-import 'form/cupertino_form.dart';
+import 'example/cupertino_form.dart';
 import 'extra/forme_async_input_chip.dart';
 import 'material/forme_chip.dart';
 import 'cupertino/forme_cupertino_slider.dart';
@@ -23,7 +25,7 @@ import 'material/forme_checkbox.dart';
 import 'material/forme_slider.dart';
 import 'material/forme_text_field.dart';
 import 'material/forme_time.dart';
-import 'form/material_form.dart';
+import 'example/profile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -66,12 +68,14 @@ class MyApp extends StatelessWidget {
         '/FormeCupertinoSlider': (context) => FormeCupertinoSliderScreen(),
         '/FormeCupertinoSwitch': (context) => FormeCupertinoSwitchScreen(),
         '/FormeCupertinoPicker': (context) => FormeCupertinoPickerScreen(),
-        '/MaterialForm': (context) => const MaterialFormScreen(),
+        '/Profile': (context) => const ProfileScreen(),
         '/CupertinoForm': (context) => const CupertinoFormScreen(),
         '/FormeAsyncInputChip': (context) => FormeAsyncInputChipScreen(),
         '/FormeRatingBar': (context) => FormeRatingBarScreen(),
         '/FormePinCodeTextField': (context) => FormePinCodeTextFieldScreen(),
         '/FormeSpinNumberField': (context) => FormeSpinNumberFieldScreen(),
+        '/AssociateValidation': (context) => const AssociateValidationScreen(),
+        '/DynamicFields': (context) => const DynamicFieldsScreen(),
       },
     );
   }
@@ -210,12 +214,18 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const ExpansionTile(
               title: Text(
-                "Form",
+                "Example",
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
               children: <Widget>[
                 ListTile(
-                  title: FieldLink('MaterialForm'),
+                  title: FieldLink('Profile'),
+                ),
+                ListTile(
+                  title: FieldLink('AssociateValidation'),
+                ),
+                ListTile(
+                  title: FieldLink('DynamicFields'),
                 ),
                 ListTile(
                   title: FieldLink('CupertinoForm'),
