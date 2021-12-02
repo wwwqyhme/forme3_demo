@@ -54,14 +54,15 @@ class _DynamicFieldsScreenState extends State<DynamicFieldsScreen> {
                           return ValueListenableBuilder<FormeFieldValidation>(
                               valueListenable: f.validationListenable,
                               builder: (context, validation, child) {
-                                if (validation.isValid) {
-                                  return FormeTextField(
+                                return Visibility(
+                                  maintainState: true,
+                                  visible: validation.isValid,
+                                  child: FormeTextField(
                                     name: 'address',
                                     decoration: const InputDecoration(
                                         labelText: 'Address'),
-                                  );
-                                }
-                                return const SizedBox.shrink();
+                                  ),
+                                );
                               });
                         });
                   },
