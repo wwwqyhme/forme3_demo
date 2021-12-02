@@ -42,19 +42,58 @@ class _DynamicFieldsScreenState extends State<DynamicFieldsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: List.of(widgets.value)
+                ..add(Builder(
+                  builder: (context) {
+                    return ValueListenableBuilder<
+                            FormeFieldController<String>?>(
+                        valueListenable: key.fieldListenable<String>('email'),
+                        builder: (context, f, child) {
+                          if (f == null) {
+                            return const SizedBox.shrink();
+                          }
+                          return ValueListenableBuilder<FormeFieldValidation>(
+                              valueListenable: f.validationListenable,
+                              builder: (context, validation, child) {
+                                if (validation.isValid) {
+                                  return FormeTextField(
+                                    name: 'address',
+                                    decoration: const InputDecoration(
+                                        labelText: 'Address'),
+                                  );
+                                }
+                                return const SizedBox.shrink();
+                              });
+                        });
+                  },
+                ))
                 ..addAll([
                   _Scope(
                     Wrap(
                       children: [
                         _Button(
                           FormeTextField(
-                            name: 'email',
-                            decoration:
-                                const InputDecoration(labelText: 'email'),
-                            validator: (f, v) {
-                              return 'xxx';
-                            },
-                          ),
+                              name: 'email',
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              decoration: const InputDecoration(
+                                  labelText: 'email',
+                                  helperText:
+                                      'input a valid email(length > 10) , address field will be auto created'),
+                              validator: (f, v) {
+                                if (!RegExp(
+                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(v)) {
+                                  return 'Please enter valid email address';
+                                }
+                              },
+                              asyncValidator: (f, v, isValid) {
+                                return Future.delayed(
+                                    const Duration(seconds: 1), () {
+                                  if (v.length < 10) {
+                                    return 'Email is exists';
+                                  }
+                                });
+                              }),
                           'Remove Email',
                           'Append Email',
                         ),

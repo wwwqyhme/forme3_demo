@@ -60,7 +60,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   name: 'email',
                   decoration: const InputDecoration(labelText: 'Email'),
                   validator: (f, v) {
-                    print('email validate');
                     if (!RegExp(
                             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                         .hasMatch(v)) {
