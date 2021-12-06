@@ -21,7 +21,7 @@ class _AssociateValidationScreenState extends State<AssociateValidationScreen> {
           padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
           child: Forme(
             key: key,
-            onValidationChanged: (f, v) {
+            onFieldValidationChanged: (f, v) {
               if (v.isValid) {
                 (f.name == 'max' ? key.field('min') : key.field('max'))
                     .validate();

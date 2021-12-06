@@ -47,7 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onFocusChanged: (f, focus) {
               print('${f.name} focus changed: is focused:$focus');
             },
-            onValidationChanged: (f, validation) {
+            onFieldValidationChanged: (f, validation) {
               print('${f.name} validation changed: current:$validation');
             },
             autovalidateMode: AutovalidateMode.always,
@@ -197,26 +197,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ],
                 ),
-                Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 16.0),
-                    child: Builder(
-                      builder: (context) {
-                        return ElevatedButton(
-                          onPressed: () {
-                            key.validate(quietly: false).then((value) {
-                              if (value.isValid &&
-                                  !value.isValueChangedDuringValidation) {
-                                key.save();
-                                print(user);
-                                _showDialog(context);
-                              }
-                            });
-                          },
-                          child: const Text('Save'),
-                        );
-                      },
-                    )),
+                Builder(
+                  builder: (context) {
+                    return ValueListenableBuilder<FormeValidation>(
+                        valueListenable: key.validationListenable,
+                        builder: (context, validation, child) {
+                          if (!validation.isValidOrUnnecessaryOrEmpty) {
+                            return const SizedBox.shrink();
+                          }
+                          return Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16.0, horizontal: 16.0),
+                              child: Builder(
+                                builder: (context) {
+                                  return ElevatedButton(
+                                    onPressed: () {
+                                      key
+                                          .validate(quietly: false)
+                                          .then((value) {
+                                        if (value.isValid &&
+                                            !value
+                                                .isValueChangedDuringValidation) {
+                                          key.save();
+                                          print(user);
+                                          _showDialog(context);
+                                        }
+                                      });
+                                    },
+                                    child: const Text('Save'),
+                                  );
+                                },
+                              ));
+                        });
+                  },
+                ),
                 Container(
                     padding: const EdgeInsets.symmetric(
                         vertical: 16.0, horizontal: 16.0),
