@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forme/forme.dart';
-import 'package:forme_fields/forme_fields.dart';
+import 'package:forme_file_picker/forme_file_picker.dart';
 
 import '../exmaple.dart';
 import '../forme_screen.dart';
