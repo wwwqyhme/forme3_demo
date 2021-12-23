@@ -212,15 +212,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 builder: (context) {
                                   return ElevatedButton(
                                     onPressed: () {
-                                      key
-                                          .validate(quietly: false)
-                                          .then((value) {
+                                      key.validate(quietly: true).then((value) {
                                         if (value.isValid &&
                                             !value
                                                 .isValueChangedDuringValidation) {
                                           key.save();
                                           print(user);
-                                          _showDialog(context);
                                         }
                                       });
                                     },
@@ -250,11 +247,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
-  }
-
-  _showDialog(BuildContext context) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text('Submitting form')));
   }
 }
 
