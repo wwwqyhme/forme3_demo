@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:forme/forme.dart';
 import 'package:forme_file_picker/forme_file_picker.dart';
 
@@ -98,9 +97,8 @@ class FormeImagePickerScreen extends FormeScreen {
                                           .draggingListenable,
                                   builder: (context, dragging, child) {
                                     if (dragging) {
-                                      return DragTarget<int>(
-                                          onWillAccept: (data) {
-                                        return true;
+                                      return DragTarget(onWillAccept: (data) {
+                                        return field.canAccept(data);
                                       }, builder: (context, a, b) {
                                         return Container(
                                           height: 100,

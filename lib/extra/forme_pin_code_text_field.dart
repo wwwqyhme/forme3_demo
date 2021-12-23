@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
 import 'package:forme_fields/forme_fields.dart';
@@ -48,9 +47,7 @@ class FormePinCodeTextFieldScreen extends FormeScreen {
                       activeFillColor: Colors.white,
                     ),
                     validator: (f, v) {
-                      return v.length < 6
-                          ? 'pls input all pin code'
-                          : null;
+                      return v.length < 6 ? 'pls input all pin code' : null;
                     },
                     decorator: const FormeInputDecoratorBuilder(
                         decoration: InputDecoration(labelText: 'Pin Code')),
