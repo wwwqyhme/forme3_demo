@@ -19,6 +19,7 @@ class FormeImagePickerScreen extends FormeScreen {
                   formeKey: key,
                   name: 'images1',
                   field: FormeImagePicker(
+                    draggable: (item, index) => false,
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 150),
@@ -32,6 +33,7 @@ class FormeImagePickerScreen extends FormeScreen {
                   formeKey: key,
                   name: 'images2',
                   field: FormeImagePicker(
+                    draggable: (item, index) => false,
                     supportCamera: true,
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -45,8 +47,6 @@ class FormeImagePickerScreen extends FormeScreen {
                   formeKey: key,
                   name: 'images3',
                   field: FormeImagePicker(
-                    draggableConfiguration:
-                        DraggableConfiguration<FormeImage>(),
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 150),
@@ -55,18 +55,12 @@ class FormeImagePickerScreen extends FormeScreen {
                   title: 'FormeImagePicker3',
                 ),
                 Example(
-                  subTitle: 'display  network images',
+                  subTitle: 'disable drag&remove on first image',
                   formeKey: key,
                   name: 'images4',
                   field: FormeImagePicker(
-                    initialValue: [
-                      _NImage(
-                          'https://raw.githubusercontent.com/wwwqyhme/forme3_demo/main/image/a.jpg'),
-                      _NImage(
-                          'https://raw.githubusercontent.com/wwwqyhme/forme3_demo/main/image/b.png'),
-                    ],
-                    draggableConfiguration:
-                        DraggableConfiguration<FormeImage>(),
+                    draggable: (item, index) => index != 0,
+                    removable: (item, index) => index != 0,
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 150),
@@ -75,9 +69,27 @@ class FormeImagePickerScreen extends FormeScreen {
                   title: 'FormeImagePicker4',
                 ),
                 Example(
-                  subTitle: 'delete files with drag!',
+                  subTitle: 'display  network images',
                   formeKey: key,
                   name: 'images5',
+                  field: FormeImagePicker(
+                    initialValue: [
+                      _NImage(
+                          'https://raw.githubusercontent.com/wwwqyhme/forme3_demo/main/image/a.jpg'),
+                      _NImage(
+                          'https://raw.githubusercontent.com/wwwqyhme/forme3_demo/main/image/b.png'),
+                    ],
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 150),
+                    name: 'images5',
+                  ),
+                  title: 'FormeImagePicker5',
+                ),
+                Example(
+                  subTitle: 'delete files with drag!',
+                  formeKey: key,
+                  name: 'images6',
                   field: FormeImagePicker(
                     showGridItemRemoveIcon: false,
                     onDragCompleted: (field, index) {
@@ -120,17 +132,15 @@ class FormeImagePickerScreen extends FormeScreen {
                             ],
                           );
                         }),
-                    draggableConfiguration:
-                        DraggableConfiguration<FormeImage>(),
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 150,
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10,
                     ),
-                    name: 'images5',
+                    name: 'images6',
                   ),
-                  title: 'FormeImagePicker5',
+                  title: 'FormeImagePicker6',
                 ),
               ];
             });
