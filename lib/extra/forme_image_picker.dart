@@ -98,9 +98,8 @@ class FormeImagePickerScreen extends FormeScreen {
                                           .draggingListenable,
                                   builder: (context, dragging, child) {
                                     if (dragging) {
-                                      return DragTarget<int>(
-                                          onWillAccept: (data) {
-                                        return true;
+                                      return DragTarget(onWillAccept: (data) {
+                                        return field.canAccept(data);
                                       }, builder: (context, a, b) {
                                         return Container(
                                           height: 100,
