@@ -10,6 +10,7 @@ import '../forme_screen.dart';
 class FormeImagePickerScreen extends FormeScreen {
   FormeImagePickerScreen({Key? key})
       : super(
+            sourceCode: 'extra/forme_image_picker',
             key: key,
             title: 'FormeImagePicker',
             builder: (context, key) {
@@ -144,6 +145,26 @@ class FormeImagePickerScreen extends FormeScreen {
                     name: 'images6',
                   ),
                   title: 'FormeImagePicker6',
+                ),
+                Example(
+                  subTitle: 'validate? if you need',
+                  formeKey: key,
+                  name: 'images7',
+                  field: FormeImagePicker(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    decoration: const InputDecoration(labelText: 'Pick Images'),
+                    validator: (field, value) {
+                      if (value.length < 2) {
+                        return 'you must pick at least 2 images';
+                      }
+                    },
+                    maximum: 9,
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 150),
+                    name: 'images7',
+                  ),
+                  title: 'FormeImagePicker7',
                 ),
               ];
             });

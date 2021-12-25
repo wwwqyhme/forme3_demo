@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 typedef FieldBuilder = List<Widget> Function(
     BuildContext context, FormeKey key);
@@ -9,12 +10,14 @@ class FormeScreen extends StatefulWidget {
   final FieldBuilder builder;
   final VoidCallback? onInitState;
   final VoidCallback? onDispose;
+  final String? sourceCode;
   const FormeScreen({
     Key? key,
     required this.title,
     required this.builder,
     this.onDispose,
     this.onInitState,
+    this.sourceCode,
   }) : super(key: key);
 
   @override
@@ -41,6 +44,14 @@ class _FormeScreenState extends State<FormeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        leading: widget.sourceCode == null
+            ? null
+            : IconButton(
+                onPressed: () {
+                  launch(
+                      'https://github.com/wwwqyhme/forme3_demo/blob/main/lib/${widget.sourceCode!}.dart');
+                },
+                icon: const Icon(Icons.source)),
       ),
       body: SingleChildScrollView(
         child: Padding(
