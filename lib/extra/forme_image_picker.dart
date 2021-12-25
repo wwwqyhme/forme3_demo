@@ -15,6 +15,7 @@ class FormeImagePickerScreen extends FormeScreen {
             builder: (context, key) {
               return [
                 Example(
+                  subTitle: 'default',
                   formeKey: key,
                   name: 'images1',
                   field: FormeImagePicker(
@@ -31,6 +32,7 @@ class FormeImagePickerScreen extends FormeScreen {
                   formeKey: key,
                   name: 'images2',
                   field: FormeImagePicker(
+                    draggable: (item, index) => false,
                     supportCamera: true,
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -40,12 +42,16 @@ class FormeImagePickerScreen extends FormeScreen {
                   title: 'FormeImagePicker2',
                 ),
                 Example(
-                  subTitle: 'drag & sort (long press on image to start drag)',
+                  subTitle: 'display  network images',
                   formeKey: key,
                   name: 'images3',
                   field: FormeImagePicker(
-                    draggableConfiguration:
-                        DraggableConfiguration<FormeImage>(),
+                    initialValue: [
+                      _NImage(
+                          'https://raw.githubusercontent.com/wwwqyhme/forme3_demo/main/image/a.jpg'),
+                      _NImage(
+                          'https://raw.githubusercontent.com/wwwqyhme/forme3_demo/main/image/b.png'),
+                    ],
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 150),
@@ -54,34 +60,11 @@ class FormeImagePickerScreen extends FormeScreen {
                   title: 'FormeImagePicker3',
                 ),
                 Example(
-                  subTitle: 'display  network images',
+                  subTitle: 'delete files with drag!',
                   formeKey: key,
                   name: 'images4',
                   field: FormeImagePicker(
-                    initialValue: [
-                      _NImage(
-                          'https://raw.githubusercontent.com/wwwqyhme/forme3_demo/main/image/a.jpg'),
-                      _NImage(
-                          'https://raw.githubusercontent.com/wwwqyhme/forme3_demo/main/image/b.png'),
-                    ],
-                    draggableConfiguration:
-                        DraggableConfiguration<FormeImage>(),
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 150),
-                    name: 'images4',
-                  ),
-                  title: 'FormeImagePicker4',
-                ),
-                Example(
-                  subTitle: 'delete files with drag!',
-                  formeKey: key,
-                  name: 'images5',
-                  field: FormeImagePicker(
                     showGridItemRemoveIcon: false,
-                    onDragCompleted: (field, index) {
-                      field.remove(index);
-                    },
                     decorator: FormeInputDecoratorBuilder(
                         decoration: const InputDecoration(labelText: 'Images'),
                         wrapper: (child, field) {
@@ -99,6 +82,8 @@ class FormeImagePickerScreen extends FormeScreen {
                                     if (dragging) {
                                       return DragTarget(onWillAccept: (data) {
                                         return field.canAccept(data);
+                                      }, onAccept: (data) {
+                                        field.removeData(data);
                                       }, builder: (context, a, b) {
                                         return Container(
                                           height: 100,
@@ -119,17 +104,46 @@ class FormeImagePickerScreen extends FormeScreen {
                             ],
                           );
                         }),
-                    draggableConfiguration:
-                        DraggableConfiguration<FormeImage>(),
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 150,
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10,
                     ),
+                    name: 'images4',
+                  ),
+                  title: 'FormeImagePicker4',
+                ),
+                Example(
+                  subTitle: 'disable drag',
+                  formeKey: key,
+                  name: 'images5',
+                  field: FormeImagePicker(
+                    draggable: (item, index) => false,
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 150),
                     name: 'images5',
                   ),
                   title: 'FormeImagePicker5',
+                ),
+                Example(
+                  subTitle: 'disable drag & remove first image',
+                  formeKey: key,
+                  name: 'images6',
+                  field: FormeImagePicker(
+                    initialValue: [
+                      _NImage(
+                          'https://raw.githubusercontent.com/wwwqyhme/forme3_demo/main/image/a.jpg'),
+                    ],
+                    draggable: (item, index) => index != 0,
+                    removable: (item, index) => index != 0,
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 150),
+                    name: 'images6',
+                  ),
+                  title: 'FormeImagePicker6',
                 ),
               ];
             });
