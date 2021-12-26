@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
 import 'package:forme_file_picker/forme_file_picker.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../exmaple.dart';
 import '../forme_screen.dart';
@@ -24,6 +25,7 @@ class FormeImagePickerScreen extends FormeScreen {
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 150),
                     name: 'images1',
+                    pickFromGallery: (max) => _pick(max, ImageSource.gallery),
                   ),
                   title: 'FormeImagePicker',
                 ),
@@ -39,6 +41,8 @@ class FormeImagePickerScreen extends FormeScreen {
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 150),
                     name: 'images2',
+                    pickFromGallery: (max) => _pick(max, ImageSource.gallery),
+                    pickFromCamera: (max) => _pick(max, ImageSource.camera),
                   ),
                   title: 'FormeImagePicker2',
                 ),
@@ -57,6 +61,7 @@ class FormeImagePickerScreen extends FormeScreen {
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 150),
                     name: 'images3',
+                    pickFromGallery: (max) => _pick(max, ImageSource.gallery),
                   ),
                   title: 'FormeImagePicker3',
                 ),
@@ -65,6 +70,7 @@ class FormeImagePickerScreen extends FormeScreen {
                   formeKey: key,
                   name: 'images4',
                   field: FormeImagePicker(
+                    pickFromGallery: (max) => _pick(max, ImageSource.gallery),
                     showGridItemRemoveIcon: false,
                     decorator: FormeInputDecoratorBuilder(
                         decoration: const InputDecoration(labelText: 'Images'),
@@ -120,6 +126,7 @@ class FormeImagePickerScreen extends FormeScreen {
                   formeKey: key,
                   name: 'images5',
                   field: FormeImagePicker(
+                    pickFromGallery: (max) => _pick(max, ImageSource.gallery),
                     draggable: (item, index) => false,
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -133,6 +140,7 @@ class FormeImagePickerScreen extends FormeScreen {
                   formeKey: key,
                   name: 'images6',
                   field: FormeImagePicker(
+                    pickFromGallery: (max) => _pick(max, ImageSource.gallery),
                     initialValue: [
                       _NImage(
                           'https://raw.githubusercontent.com/wwwqyhme/forme3_demo/main/image/a.jpg'),
@@ -151,6 +159,7 @@ class FormeImagePickerScreen extends FormeScreen {
                   formeKey: key,
                   name: 'images7',
                   field: FormeImagePicker(
+                    pickFromGallery: (max) => _pick(max, ImageSource.gallery),
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: const InputDecoration(labelText: 'Pick Images'),
                     validator: (field, value) {
@@ -170,6 +179,20 @@ class FormeImagePickerScreen extends FormeScreen {
             });
 }
 
+Future<List<FormeImage>> _pick(int? max, ImageSource source) async {
+  final ImagePicker picker = ImagePicker();
+  final List<FormeImage> images;
+  if (max == 1 || source == ImageSource.camera) {
+    XFile? xFile = await picker.pickImage(source: source);
+    images = xFile == null ? [] : [_XFileFormeImage(xFile)];
+  } else {
+    images = (await picker.pickMultiImage() ?? [])
+        .map((e) => _XFileFormeImage(e))
+        .toList();
+  }
+  return images;
+}
+
 class _NImage extends FormeImage {
   final String url;
 
@@ -183,7 +206,23 @@ class _NImage extends FormeImage {
   String? get name => throw UnimplementedError();
 
   @override
-  Future<Uint8List?> readAsBytes() {
+  Future<Uint8List>? readAsBytes() {
     throw UnimplementedError();
   }
+}
+
+class _XFileFormeImage extends FormeImage {
+  final XFile xFile;
+
+  _XFileFormeImage(this.xFile);
+  @override
+  Future<ImageProvider<Object>> get image async {
+    return MemoryImage(await xFile.readAsBytes());
+  }
+
+  @override
+  String? get name => xFile.name;
+
+  @override
+  Future<Uint8List>? readAsBytes() => xFile.readAsBytes();
 }

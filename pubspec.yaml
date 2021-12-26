@@ -36,8 +36,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   forme: ^3.2.3
   forme_fields: ^1.1.2+2
-  forme_file_picker: ^1.0.0-beta.5+1
   url_launcher: ^6.0.12
+  forme_file_picker: ^1.0.0-beta.6+1
+  image_picker: ^0.8.4+4
 
 dev_dependencies:
   flutter_test:
