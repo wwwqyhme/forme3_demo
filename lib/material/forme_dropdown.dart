@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:forme/forme.dart';
+import 'package:forme_base_fields/forme_base_fields.dart';
 
 import '../exmaple.dart';
 import '../forme_screen.dart';
@@ -15,6 +15,12 @@ class FormeDropdownScreen extends FormeScreen {
                   formeKey: key,
                   name: 'dropdown',
                   field: FormeDropdownButton<String>(
+                    // useTempValueDuringBeforeValueChangedChecking: false,
+                    beforeValueChanged: (f, v, isValid) {
+                      return Future.delayed(const Duration(seconds: 2), () {
+                        return v == 'item3';
+                      });
+                    },
                     icon: Row(children: [
                       InkWell(
                         onTap: () {

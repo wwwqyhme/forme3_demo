@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
 import 'package:forme_fields/forme_fields.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:forme_base_fields/forme_base_fields.dart';
 
 import '../exmaple.dart';
 import '../forme_screen.dart';
