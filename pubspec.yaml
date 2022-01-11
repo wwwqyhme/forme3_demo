@@ -35,9 +35,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   url_launcher: ^6.0.12
-  forme: ^3.5.0
-  forme_base_fields: ^1.0.0
-  forme_fields: ^1.1.3
+  forme: ^3.5.1+1
+  forme_base_fields:
+    path: ../forme_base_fields
+  forme_fields: 
+    path: ../forme_fields
   forme_file_picker: ^1.0.0+1
   image_picker: ^0.8.4+4
 

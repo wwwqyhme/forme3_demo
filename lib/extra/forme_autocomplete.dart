@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
 import 'package:forme_fields/forme_fields.dart';
@@ -92,24 +94,22 @@ class FormeAutocompleteScreen extends FormeScreen {
                         ),
                         Builder(builder: (BuildContext context) {
                           return ValueListenableBuilder<
-                                  FormeAsyncAutocompleteSearchState>(
+                                  FormeAsyncOperationState?>(
                               valueListenable: (key.field('asyncAutocomplete3')
                                       as FormeAsnycAutocompleteController)
                                   .stateListenable,
                               builder: (context, state, child) {
+                                if (state == null) {
+                                  return const Text('wait for search');
+                                }
                                 switch (state) {
-                                  case FormeAsyncAutocompleteSearchState
-                                      .loading:
+                                  case FormeAsyncOperationState.processing:
                                     return const Text('searching...');
-                                  case FormeAsyncAutocompleteSearchState
-                                      .success:
+                                  case FormeAsyncOperationState.success:
                                     return const Text('search complete');
-                                  case FormeAsyncAutocompleteSearchState.error:
+                                  case FormeAsyncOperationState.error:
                                     return const Text(
                                         'error occured when searching');
-                                  case FormeAsyncAutocompleteSearchState
-                                      .waiting:
-                                    return const Text('wait for search');
                                 }
                               });
                         }),

@@ -154,7 +154,7 @@ class FormeAsyncInputChipScreen extends FormeScreen {
 
                         return ValueListenableBuilder3<
                                 bool,
-                                FormeAsyncAutocompleteSearchState,
+                                FormeAsyncOperationState?,
                                 FormeFieldValidation>(
                             controller.optionsViewVisibeStateListenable,
                             controller.stateListenable,
@@ -163,8 +163,7 @@ class FormeAsyncInputChipScreen extends FormeScreen {
                           if (visible) {
                             return const SizedBox();
                           }
-                          if (state ==
-                              FormeAsyncAutocompleteSearchState.loading) {
+                          if (state == FormeAsyncOperationState.processing) {
                             return const Material(
                               elevation: 4.0,
                               child: SizedBox(
