@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forme_demo/example/dynamic_fields.dart';
 import 'package:forme_demo/extra/forme_image_picker.dart';
 import 'package:forme_demo/extra/forme_pin_code_text_field.dart';
+import 'package:forme_demo/extra/forme_searchable.dart';
 import 'package:forme_demo/extra/forme_spin_number_field.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -78,6 +79,7 @@ class MyApp extends StatelessWidget {
         '/AssociateValidation': (context) => const AssociateValidationScreen(),
         '/DynamicFields': (context) => const DynamicFieldsScreen(),
         '/FormeImagePicker': (context) => FormeImagePickerScreen(),
+        '/FormeSearchable': (context) => FormeSearchableFieldScreen(),
       },
     );
   }
@@ -216,6 +218,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 ListTile(
                   title: FieldLink('FormeImagePicker'),
+                ),
+                ListTile(
+                  title: FieldLink('FormeSearchable'),
                 )
               ],
             ),
