@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forme_demo/extra/forme_searchable_content2.dart';
 import 'package:forme_searchable/forme_searchable.dart';
 
 import '../exmaple.dart';
@@ -53,7 +54,7 @@ class FormeSearchableFieldScreen extends FormeScreen {
                   formeKey: key,
                   name: 'bottomSheet',
                   field: FormeSearchable<String>.bottomSheet(
-                    heightProvider: (context) => 300,
+                    maxHeightProvider: (context) => 300,
                     name: 'bottomSheet',
                     query: _defaultQuery,
                     bottomSheetConfiguration: FormeBottomSheetConfiguration(
@@ -68,37 +69,40 @@ class FormeSearchableFieldScreen extends FormeScreen {
                 ),
                 Example(
                   formeKey: key,
-                  name: 'dialog2',
-                  subTitle:
-                      'disable pagination via FormePaginationConfiguration or auto disabled when totalPage is 1',
-                  field: FormeSearchable<String>.dialog(
-                    name: 'dialog2',
-                    query: _defaultQuery,
-                    contentWidgetBuilder:
-                        (formKey, query, result, state, currentPage) {
-                      return FormeSearchableContent(
-                        result: result,
-                        formKey: formKey,
-                        onPageChanged: query,
-                        state: state,
-                        currentPage: currentPage,
-                        paginationConfiguration:
-                            const FormePaginationConfiguration(enable: false),
-                      );
-                    },
-                  ),
-                  title: 'No Pagination',
-                ),
-                Example(
-                  formeKey: key,
                   name: 'dialogSize',
                   field: FormeSearchable<String>.dialog(
                     name: 'dialogSize',
                     query: _defaultQuery,
-                    heightFactorProvider: (context) => 0.5,
-                    widthFactorProvider: (context) => 0.5,
+                    sizeProvider: (context) {
+                      final MediaQueryData mediaQueryData =
+                          MediaQuery.of(context);
+                      return Size(
+                        mediaQueryData.size.width * 0.8,
+                        mediaQueryData.size.height * 0.8,
+                      );
+                    },
                   ),
-                  title: 'Dialog size',
+                  title: 'Customize dialog size',
+                ),
+                Example(
+                  formeKey: key,
+                  name: 'infinite',
+                  field: FormeSearchable<String>.dialog(
+                    name: 'infinite',
+                    query: _defaultQuery,
+                    sizeProvider: (context) {
+                      final MediaQueryData mediaQueryData =
+                          MediaQuery.of(context);
+                      return Size(
+                        mediaQueryData.size.width * 0.8,
+                        mediaQueryData.size.height * 0.8,
+                      );
+                    },
+                    contentBuilder: (context) {
+                      return const FormeSearchableContent2();
+                    },
+                  ),
+                  title: 'infinite scroll pagination',
                 ),
                 Example(
                   formeKey: key,
@@ -106,12 +110,18 @@ class FormeSearchableFieldScreen extends FormeScreen {
                   field: FormeSearchable<String>.dialog(
                     name: 'limit',
                     query: _defaultQuery,
-                    heightFactorProvider: (context) => 0.5,
-                    widthFactorProvider: (context) => 0.5,
+                    sizeProvider: (context) {
+                      final MediaQueryData mediaQueryData =
+                          MediaQuery.of(context);
+                      return Size(
+                        mediaQueryData.size.width * 0.8,
+                        mediaQueryData.size.height * 0.8,
+                      );
+                    },
                     limit: 2,
                     onLimitExceeded: (context) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('max selectable num is 2')));
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('max selectable num is 2')));
                     },
                   ),
                   title: 'Limit Selectable num',

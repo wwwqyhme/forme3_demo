@@ -120,21 +120,21 @@ packages:
       path: "../forme_base_fields"
       relative: true
     source: path
-    version: "1.0.0+1"
+    version: "1.0.0+2"
   forme_fields:
     dependency: "direct main"
     description:
       path: "../forme_fields"
       relative: true
     source: path
-    version: "1.1.4"
+    version: "1.1.4+1"
   forme_file_picker:
     dependency: "direct main"
     description:
       path: "e:/forme_file_picker"
       relative: false
     source: path
-    version: "1.0.1"
+    version: "1.0.1+1"
   forme_searchable:
     dependency: "direct main"
     description:
@@ -177,6 +177,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.1"
+  infinite_scroll_pagination:
+    dependency: "direct main"
+    description:
+      name: infinite_scroll_pagination
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.0"
   js:
     dependency: transitive
     description:
@@ -238,6 +245,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sliver_tools:
+    dependency: transitive
+    description:
+      name: sliver_tools
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.5"
   source_span:
     dependency: transitive
     description:
