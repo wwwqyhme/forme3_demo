@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forme/forme.dart';
 import 'package:forme_demo/extra/forme_searchable_content2.dart';
 import 'package:forme_searchable/forme_searchable.dart';
 
@@ -28,6 +29,7 @@ class FormeSearchableFieldScreen extends FormeScreen {
       : super(
             key: key,
             title: 'FormeSearchable',
+            sourceCode: 'extra/forme_searchable',
             builder: (context, key) {
               return [
                 Example(
@@ -58,6 +60,7 @@ class FormeSearchableFieldScreen extends FormeScreen {
                     name: 'bottomSheet',
                     query: _defaultQuery,
                     bottomSheetConfiguration: FormeBottomSheetConfiguration(
+                      isScrollControlled: true,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(10),
@@ -99,10 +102,67 @@ class FormeSearchableFieldScreen extends FormeScreen {
                       );
                     },
                     contentBuilder: (context) {
-                      return const FormeSearchableContent2();
+                      return const FormeSearchableContent2<String>();
                     },
                   ),
                   title: 'infinite scroll pagination',
+                ),
+                Example(
+                  formeKey: key,
+                  name: 'style',
+                  field: FormeSearchable<String>.dialog(
+                    name: 'style',
+                    query: _defaultQuery,
+                    sizeProvider: (context) {
+                      final MediaQueryData mediaQueryData =
+                          MediaQuery.of(context);
+                      return Size(
+                        mediaQueryData.size.width * 0.8,
+                        mediaQueryData.size.height * 0.8,
+                      );
+                    },
+                    selectableItemBuilder: (context, data, isSelected) {
+                      return Card(
+                        child: ListTile(
+                          leading: const FlutterLogo(),
+                          title: Text(data),
+                          subtitle: Text(isSelected
+                              ? 'click to unselect'
+                              : 'click to select'),
+                        ),
+                      );
+                    },
+                    selectedItemsBuilder: (context, selected, onDelete) {
+                      return Wrap(
+                        children: selected.map((e) {
+                          return InputChip(
+                            label: Text(e),
+                            onDeleted: onDelete == null
+                                ? null
+                                : () {
+                                    onDelete(e);
+                                  },
+                            avatar: const FlutterLogo(),
+                          );
+                        }).toList(),
+                      );
+                    },
+                  ),
+                  title: 'Customize selected|selectable items',
+                ),
+                Example(
+                  formeKey: key,
+                  name: 'dropdown',
+                  field: FormeSearchable<String>.overlay(
+                    name: 'dropdown',
+                    query: _defaultQuery,
+                    maxHeightProvider: (context) => 300,
+                    contentBuilder: (context) {
+                      return const FormeSearchableContent2<String>();
+                    },
+                    decorator: _DropdownlikeDecorator(),
+                  ),
+                  title: 'dropdown like',
                 ),
                 Example(
                   formeKey: key,
@@ -128,4 +188,33 @@ class FormeSearchableFieldScreen extends FormeScreen {
                 ),
               ];
             });
+}
+
+class _DropdownlikeDecorator<T extends Object>
+    with FormeFieldDecorator<List<T>> {
+  @override
+  Widget build(FormeFieldController<List<T>> controller, Widget child) {
+    return FormeInputDecoratorBuilder<List<T>>(
+            decoration: InputDecoration(
+                suffixIcon: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ValueListenableBuilder<List<T>>(
+                        valueListenable: controller.valueListenable,
+                        builder: (context, value, child) {
+                          if (value.isNotEmpty) {
+                            return IconButton(
+                                onPressed: () {
+                                  controller.value = [];
+                                },
+                                icon: const Icon(Icons.clear));
+                          }
+                          return const SizedBox.shrink();
+                        }),
+                    const Icon(Icons.arrow_drop_down),
+                  ],
+                ),
+                suffixIconConstraints: const BoxConstraints.tightFor()))
+        .build(controller, child);
+  }
 }
