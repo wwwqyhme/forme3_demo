@@ -44,21 +44,24 @@ class _FormeSearchableContent2State<T extends Object>
       ),
       child: Material(
         elevation: 4,
-        child: PagedListView.separated(
-          pagingController: _pagingController,
-          padding: const EdgeInsets.all(16),
-          separatorBuilder: (context, index) => const SizedBox(
-            height: 16,
-          ),
-          builderDelegate: PagedChildBuilderDelegate<T>(
-            itemBuilder: (context, data, index) => InkWell(
-              child: ListTile(
-                leading: isSelected(data) ? const Text('checked') : null,
-                title: Text('$data'),
+        child: Center(
+          child: PagedListView.separated(
+            shrinkWrap: true,
+            pagingController: _pagingController,
+            padding: const EdgeInsets.all(16),
+            separatorBuilder: (context, index) => const SizedBox(
+              height: 16,
+            ),
+            builderDelegate: PagedChildBuilderDelegate<T>(
+              itemBuilder: (context, data, index) => InkWell(
+                child: ListTile(
+                  leading: isSelected(data) ? const Text('checked') : null,
+                  title: Text('$data'),
+                ),
+                onTap: () {
+                  toggle(data);
+                },
               ),
-              onTap: () {
-                toggle(data);
-              },
             ),
           ),
         ),

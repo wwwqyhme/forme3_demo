@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
+import 'package:forme_base_fields/field/material/forme_list_tile.dart';
+import 'package:forme_base_fields/field/material/forme_radio_group.dart';
+import 'package:forme_base_fields/field/material/forme_switch.dart';
+import 'package:forme_base_fields/field/material/forme_text_field.dart';
+import 'package:forme_demo/extra/forme_pagination.dart';
 import 'package:forme_demo/extra/forme_searchable_content2.dart';
 import 'package:forme_searchable/forme_searchable.dart';
 
@@ -9,6 +14,7 @@ import '../forme_screen.dart';
 class FormeSearchableFieldScreen extends FormeScreen {
   static Future<FormeSearchablePageResult<String>> _defaultQuery(
       Map<String, dynamic> condition, int page) {
+    // print('query condition:$condition');
     final String query = condition['query'] ?? '';
     if (query.isEmpty) {
       return Future.delayed(
@@ -18,9 +24,9 @@ class FormeSearchableFieldScreen extends FormeScreen {
     final List<String> result = [];
 
     for (int i = 10 * (page - 1); i < page * 10; i++) {
-      result.add('$i');
+      result.add('option $i');
     }
-    return Future.delayed(const Duration(milliseconds: 800), () {
+    return Future.delayed(const Duration(milliseconds: 100), () {
       return FormeSearchablePageResult(result, 5);
     });
   }
@@ -32,6 +38,16 @@ class FormeSearchableFieldScreen extends FormeScreen {
             sourceCode: 'extra/forme_searchable',
             builder: (context, key) {
               return [
+                Example(
+                  formeKey: key,
+                  name: 'default',
+                  field: FormeSearchable<String>(
+                    maxHeightProvider: (context) => 300,
+                    name: 'default',
+                    query: _defaultQuery,
+                  ),
+                  title: 'Default',
+                ),
                 Example(
                   formeKey: key,
                   name: 'overlay',
@@ -89,8 +105,32 @@ class FormeSearchableFieldScreen extends FormeScreen {
                 ),
                 Example(
                   formeKey: key,
+                  name: 'pagination',
+                  field: FormeSearchable<String>(
+                    maxHeightProvider: (context) => 300,
+                    name: 'pagination',
+                    query: _defaultQuery,
+                    contentBuilder: (context) {
+                      return FormeSearchableDefaultContent<String>(
+                        elevation: 4,
+                        paginationBuilder:
+                            (context, listenable, onPageChanged) {
+                          return FormePagination(
+                              buttonActiveColor: Colors.deepPurple,
+                              onPageChanged: onPageChanged,
+                              notifier: listenable);
+                        },
+                      );
+                    },
+                  ),
+                  title: 'Customize pagination',
+                ),
+                Example(
+                  formeKey: key,
                   name: 'infinite',
                   field: FormeSearchable<String>.dialog(
+                    dialogConfiguration:
+                        FormeDialogConfiguration(barrierDismissible: true),
                     name: 'infinite',
                     query: _defaultQuery,
                     sizeProvider: (context) {
@@ -106,6 +146,55 @@ class FormeSearchableFieldScreen extends FormeScreen {
                     },
                   ),
                   title: 'infinite scroll pagination',
+                ),
+                Example(
+                  formeKey: key,
+                  name: 'search',
+                  field: FormeSearchable<String>(
+                    maxHeightProvider: (context) => 300,
+                    name: 'search',
+                    query: _defaultQuery,
+                    contentBuilder: (context) {
+                      return FormeSearchableDefaultContent<String>(
+                        elevation: 4,
+                        searchFieldsBuilder: (formKey, onSubmitted) {
+                          return Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Forme(
+                              onValueChanged: (p0, newValue) {
+                                onSubmitted();
+                              },
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: FormeTextField(
+                                      name: 'query',
+                                      decoration: const InputDecoration(),
+                                    ),
+                                  ),
+                                  FormeRadioGroup(
+                                    name: 'sex',
+                                    initialValue: 'male',
+                                    items: [
+                                      FormeListTileItem(
+                                          title: const Text('male'),
+                                          data: 'male'),
+                                      FormeListTileItem(
+                                          title: const Text('female'),
+                                          data: 'female')
+                                    ],
+                                    split: 0,
+                                  ),
+                                ],
+                              ),
+                              key: formKey,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                  title: 'Customize search fields',
                 ),
                 Example(
                   formeKey: key,
@@ -149,20 +238,6 @@ class FormeSearchableFieldScreen extends FormeScreen {
                     },
                   ),
                   title: 'Customize selected|selectable items',
-                ),
-                Example(
-                  formeKey: key,
-                  name: 'dropdown',
-                  field: FormeSearchable<String>.overlay(
-                    name: 'dropdown',
-                    query: _defaultQuery,
-                    maxHeightProvider: (context) => 300,
-                    contentBuilder: (context) {
-                      return const FormeSearchableContent2<String>();
-                    },
-                    decorator: _DropdownlikeDecorator(),
-                  ),
-                  title: 'dropdown like',
                 ),
                 Example(
                   formeKey: key,
