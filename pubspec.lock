@@ -141,7 +141,7 @@ packages:
       path: "../forme_searchable"
       relative: true
     source: path
-    version: "1.0.0-beta3"
+    version: "1.0.0-beta4"
   http:
     dependency: transitive
     description:

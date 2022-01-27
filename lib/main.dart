@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:forme_demo/example/dynamic_fields.dart';
 import 'package:forme_demo/extra/forme_image_picker.dart';
 import 'package:forme_demo/extra/forme_pin_code_text_field.dart';
 import 'package:forme_demo/extra/forme_searchable.dart';
 import 'package:forme_demo/extra/forme_spin_number_field.dart';
+import 'package:forme_searchable/forme_searchable.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'example/associate_validation.dart';
 import 'extra/forme_rating_bar.dart';
-import 'example/cupertino_form.dart';
 import 'extra/forme_async_input_chip.dart';
 import 'material/forme_chip.dart';
 import 'cupertino/forme_cupertino_slider.dart';
@@ -27,7 +25,6 @@ import 'material/forme_checkbox.dart';
 import 'material/forme_slider.dart';
 import 'material/forme_text_field.dart';
 import 'material/forme_time.dart';
-import 'example/profile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -70,14 +67,10 @@ class MyApp extends StatelessWidget {
         '/FormeCupertinoSlider': (context) => FormeCupertinoSliderScreen(),
         '/FormeCupertinoSwitch': (context) => FormeCupertinoSwitchScreen(),
         '/FormeCupertinoPicker': (context) => FormeCupertinoPickerScreen(),
-        '/Profile': (context) => const ProfileScreen(),
-        '/CupertinoForm': (context) => const CupertinoFormScreen(),
         '/FormeAsyncInputChip': (context) => FormeAsyncInputChipScreen(),
         '/FormeRatingBar': (context) => FormeRatingBarScreen(),
         '/FormePinCodeTextField': (context) => FormePinCodeTextFieldScreen(),
         '/FormeSpinNumberField': (context) => FormeSpinNumberFieldScreen(),
-        '/AssociateValidation': (context) => const AssociateValidationScreen(),
-        '/DynamicFields': (context) => const DynamicFieldsScreen(),
         '/FormeImagePicker': (context) => FormeImagePickerScreen(),
         '/FormeSearchable': (context) => FormeSearchableFieldScreen(),
       },
@@ -111,6 +104,32 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Widget> children = [];
 
+  final List<String> fields = [
+    'FormeTextField',
+    'FormeCheckbox',
+    'FormeSwitch',
+    'FormeDropdown',
+    'FormeTimeField',
+    'FormeNumberField',
+    'FormeSlider',
+    'FormeChip',
+    'FormeListTile',
+    'FormeCupertinoTextField',
+    'FormeCupertinoDateTimeField',
+    'FormeCupertinoNumberTextField',
+    'FormeCupertinoSegmentedControl',
+    'FormeCupertinoSlider',
+    'FormeCupertinoSwitch',
+    'FormeCupertinoPicker',
+    'FormeAutocomplete',
+    'FormeAsyncInputChip',
+    'FormeRatingBar',
+    'FormePinCodeTextField',
+    'FormeSpinNumberField',
+    'FormeImagePicker',
+    'FormeSearchable',
+  ];
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -131,121 +150,56 @@ class _MyHomePageState extends State<MyHomePage> {
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
           children: [
-            const ExpansionTile(
-              title: Text(
-                "Material Field",
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-              children: <Widget>[
-                ListTile(
-                  title: FieldLink('FormeTextField'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeCheckbox'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeSwitch'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeDropdown'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeTimeField'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeNumberField'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeSlider'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeChip'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeListTile'),
-                ),
-              ],
-            ),
-            const ExpansionTile(
-              title: Text(
-                "Cupertino Field",
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-              children: <Widget>[
-                ListTile(
-                  title: FieldLink('FormeCupertinoTextField'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeCupertinoDateTimeField'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeCupertinoNumberTextField'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeCupertinoSegmentedControl'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeCupertinoSlider'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeCupertinoSwitch'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeCupertinoPicker'),
-                ),
-              ],
-            ),
-            const ExpansionTile(
-              title: Text(
-                "Extra Fields",
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-              children: [
-                ListTile(
-                  title: FieldLink('FormeAutocomplete'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeAsyncInputChip'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeRatingBar'),
-                ),
-                ListTile(
-                  title: FieldLink('FormePinCodeTextField'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeSpinNumberField'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeImagePicker'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeSearchable'),
-                )
-              ],
-            ),
-            const ExpansionTile(
-              title: Text(
-                "Example",
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-              children: <Widget>[
-                ListTile(
-                  title: FieldLink('Profile'),
-                ),
-                ListTile(
-                  title: FieldLink('AssociateValidation'),
-                ),
-                ListTile(
-                  title: FieldLink('DynamicFields'),
-                ),
-                ListTile(
-                  title: FieldLink('CupertinoForm'),
-                ),
-              ],
-            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: FormeSearchable<String>.overlay(
+                multiSelect: false,
+                onValueChanged: (f, v) {
+                  if (v.isNotEmpty) {
+                    Navigator.pushNamed(context, '/' + v[0]);
+                  }
+                },
+                open: true,
+                maxHeightProvider: (context) => 300,
+                name: 'search',
+                // contentPadding: const EdgeInsets.only(top: 10),
+                query: (Map<String, dynamic> condition, int page) async {
+                  final String query = condition['query'] ?? '';
+                  if (query.isEmpty) {
+                    return FormeSearchablePageResult(fields, 1);
+                  }
+                  return FormeSearchablePageResult(
+                      fields
+                          .where((element) => element
+                              .toLowerCase()
+                              .contains(query.toLowerCase()))
+                          .toList(),
+                      1);
+                },
+                selectedItemsBuilder: (context, selected, onDelete) {
+                  return const SizedBox.shrink();
+                },
+                contentBuilder: (context) {
+                  return FormeSearchableDefaultContent<String>(
+                    elevation: 4,
+                    performQueryWhenInitialed: true,
+                    enableHighlight: true,
+                    selectableItemBuilder: (context, index, data, isSelected) {
+                      final bool highlight =
+                          AutocompleteHighlightedOption.of(context) == index;
+                      return Container(
+                        color: highlight ? Theme.of(context).focusColor : null,
+                        child: ListTile(
+                          title: Text(data),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               child: InkWell(
                   child: const Text("https://github.com/wwwqyhme/forme3_demo",
                       style: TextStyle(

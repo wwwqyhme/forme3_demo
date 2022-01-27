@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
 import 'package:forme_base_fields/field/material/forme_list_tile.dart';
 import 'package:forme_base_fields/field/material/forme_radio_group.dart';
-import 'package:forme_base_fields/field/material/forme_switch.dart';
 import 'package:forme_base_fields/field/material/forme_text_field.dart';
 import 'package:forme_demo/extra/forme_pagination.dart';
 import 'package:forme_demo/extra/forme_searchable_content2.dart';
@@ -16,7 +15,9 @@ class FormeSearchableFieldScreen extends FormeScreen {
       Map<String, dynamic> condition, int page) {
     // print('query condition:$condition');
     final String query = condition['query'] ?? '';
-    if (query.isEmpty) {
+    final String? sex = condition['sex'];
+
+    if (query.isEmpty && sex == null) {
       return Future.delayed(
           Duration.zero, () => FormeSearchablePageResult([], 1));
     }
@@ -24,7 +25,7 @@ class FormeSearchableFieldScreen extends FormeScreen {
     final List<String> result = [];
 
     for (int i = 10 * (page - 1); i < page * 10; i++) {
-      result.add('option $i');
+      result.add('option $i ${sex ?? ''}');
     }
     return Future.delayed(const Duration(milliseconds: 100), () {
       return FormeSearchablePageResult(result, 5);
@@ -45,6 +46,10 @@ class FormeSearchableFieldScreen extends FormeScreen {
                     maxHeightProvider: (context) => 300,
                     name: 'default',
                     query: _defaultQuery,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (field, value) {
+                      return value.length < 2 ? 'must select at least 2' : null;
+                    },
                   ),
                   title: 'Default',
                 ),
@@ -112,6 +117,7 @@ class FormeSearchableFieldScreen extends FormeScreen {
                     query: _defaultQuery,
                     contentBuilder: (context) {
                       return FormeSearchableDefaultContent<String>(
+                        paginationBarPosition: PaginationBarPosition.bottom,
                         elevation: 4,
                         paginationBuilder:
                             (context, listenable, onPageChanged) {
@@ -156,13 +162,14 @@ class FormeSearchableFieldScreen extends FormeScreen {
                     query: _defaultQuery,
                     contentBuilder: (context) {
                       return FormeSearchableDefaultContent<String>(
+                        performQueryWhenInitialed: true,
                         elevation: 4,
-                        searchFieldsBuilder: (formKey, onSubmitted) {
+                        searchFieldsBuilder: (formKey, query, selectHighlight) {
                           return Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: Forme(
                               onValueChanged: (p0, newValue) {
-                                onSubmitted();
+                                query();
                               },
                               child: Row(
                                 children: [
@@ -210,7 +217,7 @@ class FormeSearchableFieldScreen extends FormeScreen {
                         mediaQueryData.size.height * 0.8,
                       );
                     },
-                    selectableItemBuilder: (context, data, isSelected) {
+                    selectableItemBuilder: (context, index, data, isSelected) {
                       return Card(
                         child: ListTile(
                           leading: const FlutterLogo(),
@@ -254,42 +261,56 @@ class FormeSearchableFieldScreen extends FormeScreen {
                       );
                     },
                     limit: 2,
-                    onLimitExceeded: (context) {
+                    onLimitExceeded: (context, value, data) {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text('max selectable num is 2')));
+                      return value;
                     },
                   ),
                   title: 'Limit Selectable num',
+                ),
+                Example(
+                  formeKey: key,
+                  name: 'button',
+                  field: FormeSearchable<String>(
+                    name: 'button',
+                    multiSelect: false,
+                    selectedItemsBuilder: (context, selected, onDelete) {
+                      return Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(selected.isEmpty ? 'select one' : selected[0]),
+                          if (onDelete != null && selected.isNotEmpty)
+                            InkWell(
+                              child: const Icon(
+                                Icons.clear,
+                                size: 14,
+                              ),
+                              onTap: () {
+                                onDelete(selected[0]);
+                              },
+                            ),
+                        ],
+                      );
+                    },
+                    decorator: _ButtonDecorator(),
+                    query: _defaultQuery,
+                    contentPadding: const EdgeInsets.only(top: 10),
+                    maxHeightProvider: (context) => 300,
+                  ),
+                  title: 'Single select',
                 ),
               ];
             });
 }
 
-class _DropdownlikeDecorator<T extends Object>
-    with FormeFieldDecorator<List<T>> {
+class _ButtonDecorator with FormeFieldDecorator<List<String>> {
   @override
-  Widget build(FormeFieldController<List<T>> controller, Widget child) {
-    return FormeInputDecoratorBuilder<List<T>>(
-            decoration: InputDecoration(
-                suffixIcon: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ValueListenableBuilder<List<T>>(
-                        valueListenable: controller.valueListenable,
-                        builder: (context, value, child) {
-                          if (value.isNotEmpty) {
-                            return IconButton(
-                                onPressed: () {
-                                  controller.value = [];
-                                },
-                                icon: const Icon(Icons.clear));
-                          }
-                          return const SizedBox.shrink();
-                        }),
-                    const Icon(Icons.arrow_drop_down),
-                  ],
-                ),
-                suffixIconConstraints: const BoxConstraints.tightFor()))
-        .build(controller, child);
+  Widget build(FormeFieldController<List<String>> controller, Widget child) {
+    return ElevatedButton(
+        onPressed: () {
+          (controller as FormeSearchableController).toggle();
+        },
+        child: child);
   }
 }

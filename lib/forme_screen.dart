@@ -43,15 +43,22 @@ class _FormeScreenState extends State<FormeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
-        leading: widget.sourceCode == null
-            ? null
-            : IconButton(
-                onPressed: () {
-                  launch(
-                      'https://github.com/wwwqyhme/forme3_demo/blob/main/lib/${widget.sourceCode!}.dart');
-                },
-                icon: const Icon(Icons.source)),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            if (widget.sourceCode != null)
+              IconButton(
+                  onPressed: () {
+                    launch(
+                        'https://github.com/wwwqyhme/forme3_demo/blob/main/lib/${widget.sourceCode!}.dart');
+                  },
+                  icon: const Icon(Icons.source)),
+            Expanded(
+              child: Text(widget.title),
+            )
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
