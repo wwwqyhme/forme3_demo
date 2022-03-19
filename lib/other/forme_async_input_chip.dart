@@ -2,10 +2,9 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:forme/forme.dart';
 import 'package:forme_fields/forme_fields.dart';
 
-import '../exmaple.dart';
+import '../example.dart';
 import '../forme_screen.dart';
 
 class FormeAsyncInputChipScreen extends FormeScreen {
@@ -42,7 +41,6 @@ class FormeAsyncInputChipScreen extends FormeScreen {
                 Example(
                   subTitle: 'adjust options view height automatically ',
                   formeKey: key,
-                  name: 'asyncInputChip',
                   field: FormeAsyncInputChip<String>(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: validator,
@@ -84,7 +82,6 @@ class FormeAsyncInputChipScreen extends FormeScreen {
                 ),
                 Example(
                   formeKey: key,
-                  name: 'asyncInputChip2',
                   subTitle: 'custom field view',
                   field: FormeAsyncInputChip<String>(
                     fieldViewBuilder: (context, selected, controller,
@@ -129,70 +126,9 @@ class FormeAsyncInputChipScreen extends FormeScreen {
                   title: 'FormeAsyncInputChip2',
                 ),
                 Example(
-                  formeKey: key,
-                  name: 'asyncInputChip3',
-                  subTitle: 'custom state ',
-                  field: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FormeAsyncInputChip<String>(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: validator,
-                        asyncValidator: asyncValidator,
-                        inputChipBuilder: inputChipBuilder,
-                        decoration: const InputDecoration(
-                          labelText: 'FormeAsyncInputChip',
-                          suffixIconConstraints: BoxConstraints.tightFor(),
-                          suffixIcon: SizedBox.shrink(),
-                        ),
-                        name: 'asyncInputChip3',
-                        optionsBuilder: optionsBuilder,
-                      ),
-                      Builder(builder: (context) {
-                        FormeAsyncInputChipController controller =
-                            key.field('asyncInputChip3');
-
-                        return ValueListenableBuilder3<
-                                bool,
-                                FormeAsyncOperationState?,
-                                FormeFieldValidation>(
-                            controller.optionsViewVisibeStateListenable,
-                            controller.stateListenable,
-                            controller.validationListenable, builder:
-                                (context, visible, state, validation, child) {
-                          if (visible) {
-                            return const SizedBox();
-                          }
-                          if (state == FormeAsyncOperationState.processing) {
-                            return const Material(
-                              elevation: 4.0,
-                              child: SizedBox(
-                                width: double.infinity,
-                                child: Text('loading'),
-                              ),
-                            );
-                          }
-                          if (validation.isValidating) {
-                            return const Material(
-                              elevation: 4.0,
-                              child: SizedBox(
-                                width: double.infinity,
-                                child: Text('validating'),
-                              ),
-                            );
-                          }
-                          return const SizedBox.shrink();
-                        });
-                      }),
-                    ],
-                  ),
-                  title: 'FormeAsyncInputChip3',
-                ),
-                Example(
                   subTitle:
                       'single select options view (FormeAsyncAutocomplete like)',
                   formeKey: key,
-                  name: 'asyncInputChip4',
                   field: FormeAsyncInputChip<String>(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: validator,
@@ -212,10 +148,10 @@ class FormeAsyncInputChipScreen extends FormeScreen {
                     decoration: const InputDecoration(
                         labelText: 'FormeAsyncInputChip',
                         suffixIconConstraints: BoxConstraints.tightFor()),
-                    name: 'asyncInputChip4',
+                    name: 'asyncInputChip3',
                     optionsBuilder: optionsBuilder,
                   ),
-                  title: 'FormeAsyncInputChip4',
+                  title: 'FormeAsyncInputChip3',
                 ),
               ];
             });

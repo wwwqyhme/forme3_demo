@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
 
-
 import 'package:forme_base_fields/forme_base_fields.dart';
 
-import '../exmaple.dart';
+import '../example.dart';
 import '../forme_screen.dart';
 
 class FormeTextFieldScreen extends FormeScreen {
@@ -28,17 +27,25 @@ class FormeTextFieldScreen extends FormeScreen {
                     TextButton(
                       child: const Text('select all'),
                       onPressed: () {
-                        (key.field(name) as FormeTextFieldController)
+                        (key.field(name) as FormeTextFieldState)
                                 .textEditingController
                                 .selection =
                             TextSelection(
                                 baseOffset: 0,
                                 extentOffset:
                                     (key.field(name).value as String).length);
+                        key.field(name).focusNode.requestFocus();
                       },
-                    )
+                    ),
+                    TextButton(
+                      child: const Text('custom error text'),
+                      onPressed: () {
+                        key.field(name).errorText = 'custom error text';
+                      },
+                    ),
                   ],
                   field: FormeTextField(
+                    // selectAllOnFocus: true,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     initialValue: 'Hello World',
                     name: name,
@@ -52,10 +59,14 @@ class FormeTextFieldScreen extends FormeScreen {
                         return Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            ValueListenableBuilder<FormeFieldValidation>(
-                                valueListenable:
-                                    key.field(name).validationListenable,
-                                builder: (context, validation, child) {
+                            FormeFieldStatusListener<String>(
+                                filter: (status) => status.isValidationChanged,
+                                builder: (context, status, child) {
+                                  if (status == null) {
+                                    return const SizedBox.shrink();
+                                  }
+                                  FormeFieldValidation validation =
+                                      status.validation;
                                   if (validation.isWaiting) {
                                     return const SizedBox();
                                   }
@@ -96,20 +107,26 @@ class FormeTextFieldScreen extends FormeScreen {
 
                                   return const SizedBox();
                                 }),
-                            ValueListenableBuilder2<bool, String>(
-                                key.field(name).focusListenable,
-                                (key.field(name) as FormeTextFieldController)
-                                    .valueListenable,
-                                builder: (context, v1, v2, child) {
-                              if (v1 && v2.isNotEmpty) {
-                                return IconButton(
-                                    onPressed: () {
-                                      key.field(name).value = '';
-                                    },
-                                    icon: const Icon(Icons.clear));
-                              }
-                              return const SizedBox();
-                            }),
+                            FormeFieldStatusListener<String>(
+                                filter: (status) =>
+                                    status.isFocusChanged ||
+                                    status.isValueChanged,
+                                builder: (context, status, child) {
+                                  if (status == null) {
+                                    return const SizedBox.shrink();
+                                  }
+                                  final bool hasFocus = status.hasFocus;
+                                  final String value = status.value;
+
+                                  if (hasFocus && value.isNotEmpty) {
+                                    return IconButton(
+                                        onPressed: () {
+                                          key.field(name).value = '';
+                                        },
+                                        icon: const Icon(Icons.clear));
+                                  }
+                                  return const SizedBox();
+                                }),
                           ],
                         );
                       }),
@@ -131,11 +148,9 @@ class FormeTextFieldScreen extends FormeScreen {
                     },
                   ),
                   formeKey: key,
-                  name: name,
                 ),
                 Example(
                     formeKey: key,
-                    name: 'obscureText',
                     title: 'ObscureText',
                     field: FormeTextField(
                         obscureText: true,
@@ -147,7 +162,6 @@ class FormeTextFieldScreen extends FormeScreen {
                             const InputDecoration(labelText: 'Obscure'))),
                 Example(
                     formeKey: key,
-                    name: 'textarea',
                     title: 'Textarea',
                     field: FormeTextField(
                         autovalidateMode: AutovalidateMode.onUserInteraction,

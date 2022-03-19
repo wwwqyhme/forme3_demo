@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forme_fields/forme_fields.dart';
 
-import '../exmaple.dart';
+import '../example.dart';
 import '../forme_screen.dart';
 
 class FormeSpinNumberFieldScreen extends FormeScreen {
@@ -13,7 +13,6 @@ class FormeSpinNumberFieldScreen extends FormeScreen {
               return [
                 Example(
                   formeKey: key,
-                  name: 'spin',
                   field: FormeSpinNumberField(
                     decoration: const InputDecoration(border: InputBorder.none),
                     name: 'spin',
@@ -27,7 +26,6 @@ class FormeSpinNumberFieldScreen extends FormeScreen {
                 ),
                 Example(
                   formeKey: key,
-                  name: 'spin2',
                   field: FormeSpinNumberField(
                     decoration: const InputDecoration(border: InputBorder.none),
                     name: 'spin2',

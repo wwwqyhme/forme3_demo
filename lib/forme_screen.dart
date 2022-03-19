@@ -21,10 +21,10 @@ class FormeScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _FormeScreenState();
+  State<StatefulWidget> createState() => FormeScreenState();
 }
 
-class _FormeScreenState extends State<FormeScreen> {
+class FormeScreenState extends State<FormeScreen> {
   final FormeKey key = FormeKey();
 
   @override

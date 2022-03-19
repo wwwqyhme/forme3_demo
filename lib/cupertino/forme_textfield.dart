@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:forme/forme.dart';
-import 'package:forme_demo/forme_screen.dart';
 import 'package:forme_base_fields/forme_base_fields.dart';
 
-import '../cupertino_exmaple.dart';
+import '../cupertino_example.dart';
 import '../forme_screen.dart';
 
 class FormeCupertinoTextFieldScreen extends FormeScreen {
@@ -30,11 +29,14 @@ class FormeCupertinoTextFieldScreen extends FormeScreen {
                         return Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            ValueListenableBuilder<FormeFieldValidation>(
-                                valueListenable: key
-                                    .field('text-field')
-                                    .validationListenable,
-                                builder: (context, validation, child) {
+                            FormeFieldStatusListener<String>(
+                                filter: (status) => status.isValidationChanged,
+                                builder: (context, status, child) {
+                                  if (status == null) {
+                                    return const SizedBox.shrink();
+                                  }
+                                  FormeFieldValidation validation =
+                                      status.validation;
                                   if (validation.isWaiting ||
                                       validation.isUnnecessary) {
                                     return const SizedBox();
@@ -65,7 +67,7 @@ class FormeCupertinoTextFieldScreen extends FormeScreen {
                                   }
 
                                   return const SizedBox();
-                                })
+                                }),
                           ],
                         );
                       }),

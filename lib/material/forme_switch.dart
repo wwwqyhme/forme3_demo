@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forme_base_fields/forme_base_fields.dart';
 
-import '../exmaple.dart';
+import '../example.dart';
 import '../forme_screen.dart';
 
 class FormeSwitchScreen extends FormeScreen {
@@ -13,7 +13,6 @@ class FormeSwitchScreen extends FormeScreen {
               return [
                 Example(
                   formeKey: key,
-                  name: 'switch',
                   buttons: [
                     TextButton(
                         onPressed: () {
@@ -37,7 +36,6 @@ class FormeSwitchScreen extends FormeScreen {
                 ),
                 Example(
                   formeKey: key,
-                  name: 'switch2',
                   field: FormeSwitchTile(
                     selected: true,
                     tristate: true,

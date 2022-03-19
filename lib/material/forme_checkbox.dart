@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forme_base_fields/forme_base_fields.dart';
 
-import '../exmaple.dart';
+import '../example.dart';
 import '../forme_screen.dart';
 
 class FormeCheckboxScreen extends FormeScreen {
@@ -13,7 +13,6 @@ class FormeCheckboxScreen extends FormeScreen {
               return [
                 Example(
                   formeKey: key,
-                  name: 'checkbox',
                   buttons: [
                     TextButton(
                         onPressed: () {
@@ -37,7 +36,6 @@ class FormeCheckboxScreen extends FormeScreen {
                 ),
                 Example(
                   formeKey: key,
-                  name: 'checkbox2',
                   field: FormeCheckbox(
                     tristate: true,
                     name: 'checkbox2',
@@ -54,7 +52,6 @@ class FormeCheckboxScreen extends FormeScreen {
                 ),
                 Example(
                   formeKey: key,
-                  name: 'checkbox3',
                   field: FormeCheckboxTile(
                     selected: true,
                     tristate: true,

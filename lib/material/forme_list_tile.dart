@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forme_base_fields/forme_base_fields.dart';
 
-import '../exmaple.dart';
+import '../example.dart';
 import '../forme_screen.dart';
 
 class FormeListTileScreen extends FormeScreen {
@@ -14,7 +14,6 @@ class FormeListTileScreen extends FormeScreen {
                 Example(
                   subTitle: 'split is 1, means ListTile like',
                   formeKey: key,
-                  name: 'checkbox-group',
                   field: FormeListTile<String>(
                     split: 1,
                     name: 'checkbox-group',
@@ -37,7 +36,6 @@ class FormeListTileScreen extends FormeScreen {
                 Example(
                   subTitle: 'split is 3, means three checkboxes per line',
                   formeKey: key,
-                  name: 'checkbox-group2',
                   field: FormeListTile<String>(
                     split: 3,
                     name: 'checkbox-group2',
@@ -76,7 +74,6 @@ class FormeListTileScreen extends FormeScreen {
                   subTitle:
                       'split is 0, means as much as possible checkboxes per line',
                   formeKey: key,
-                  name: 'checkbox-group3',
                   field: FormeListTile<String>(
                     split: 0,
                     name: 'checkbox-group3',
@@ -114,7 +111,6 @@ class FormeListTileScreen extends FormeScreen {
                 Example(
                   subTitle: 'split is 1, means ListTile like',
                   formeKey: key,
-                  name: 'switch-group',
                   field: FormeListTile<String>(
                     split: 1,
                     name: 'switch-group',
@@ -137,7 +133,6 @@ class FormeListTileScreen extends FormeScreen {
                 Example(
                   subTitle: 'split is 3, means three switchs per line',
                   formeKey: key,
-                  name: 'switch-group2',
                   field: FormeListTile<String>(
                     split: 3,
                     name: 'switch-group2',
@@ -170,7 +165,6 @@ class FormeListTileScreen extends FormeScreen {
                 Example(
                   subTitle: 'split is 1, means ListTile like',
                   formeKey: key,
-                  name: 'radio-group',
                   field: FormeRadioGroup<String>(
                     split: 1,
                     name: 'radio-group',
@@ -192,7 +186,6 @@ class FormeListTileScreen extends FormeScreen {
                 Example(
                   subTitle: 'split is 3, means three radios per line',
                   formeKey: key,
-                  name: 'radio-group2',
                   field: FormeRadioGroup<String>(
                     split: 3,
                     name: 'radio-group2',

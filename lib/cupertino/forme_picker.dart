@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:forme_base_fields/forme_base_fields.dart';
-import 'package:forme_demo/forme_screen.dart';
-
-import '../cupertino_exmaple.dart';
+import '../cupertino_example.dart';
 import '../forme_screen.dart';
 
 class FormeCupertinoPickerScreen extends FormeScreen {

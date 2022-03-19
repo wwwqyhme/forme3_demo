@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
 import 'package:forme_fields/forme_fields.dart';
 
-import '../exmaple.dart';
+import '../example.dart';
 import '../forme_screen.dart';
 
 class FormeAutocompleteScreen extends FormeScreen {
@@ -19,12 +19,12 @@ class FormeAutocompleteScreen extends FormeScreen {
     });
   }
 
-  static String? validator(FormeFieldController controller, String? value) {
+  static String? validator(FormeFieldState controller, String? value) {
     return value == '0' || value == '1' ? null : 'pls select 0 or 1';
   }
 
   static Future<String?> asyncValidator(
-      FormeFieldController controller, String? value, isValid) {
+      FormeFieldState controller, String? value, isValid) {
     return Future.delayed(const Duration(milliseconds: 500),
         () => value == '0' ? null : 'pls select 0');
   }
@@ -37,7 +37,6 @@ class FormeAutocompleteScreen extends FormeScreen {
               return [
                 Example(
                     formeKey: key,
-                    name: 'autocomplete',
                     field: FormeAutocomplete<String>(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: validator,
@@ -49,7 +48,6 @@ class FormeAutocompleteScreen extends FormeScreen {
                     title: 'FormeAutocomplete'),
                 Example(
                     formeKey: key,
-                    name: 'asyncAutocomplete',
                     field: FormeAsyncAutocomplete<String>(
                       validator: validator,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -60,7 +58,6 @@ class FormeAutocompleteScreen extends FormeScreen {
                     title: 'FormeAsyncAutocomplete'),
                 Example(
                     formeKey: key,
-                    name: 'asyncAutocomplete2',
                     field: FormeAsyncAutocomplete<String>(
                       searchCondition: (v) => v.text.isNotEmpty,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -72,51 +69,6 @@ class FormeAutocompleteScreen extends FormeScreen {
                     ),
                     title: 'FormeAsyncAutocomplete2',
                     subTitle: 'no search if search field is empty'),
-                Example(
-                    formeKey: key,
-                    name: 'asyncAutocomplete3',
-                    field: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        FormeAsyncAutocomplete<String>(
-                          decoration: const InputDecoration(
-                            labelText: 'Search',
-                            border: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.red, width: 5.0),
-                            ),
-                            suffixIcon: SizedBox.shrink(),
-                          ),
-                          validator: validator,
-                          asyncValidator: asyncValidator,
-                          optionsBuilder: asyncSearch,
-                          name: 'asyncAutocomplete3',
-                        ),
-                        Builder(builder: (BuildContext context) {
-                          return ValueListenableBuilder<
-                                  FormeAsyncOperationState?>(
-                              valueListenable: (key.field('asyncAutocomplete3')
-                                      as FormeAsnycAutocompleteController)
-                                  .stateListenable,
-                              builder: (context, state, child) {
-                                if (state == null) {
-                                  return const Text('wait for search');
-                                }
-                                switch (state) {
-                                  case FormeAsyncOperationState.processing:
-                                    return const Text('searching...');
-                                  case FormeAsyncOperationState.success:
-                                    return const Text('search complete');
-                                  case FormeAsyncOperationState.error:
-                                    return const Text(
-                                        'error occured when searching');
-                                }
-                              });
-                        }),
-                      ],
-                    ),
-                    title: 'FormeAsyncAutocomplete3',
-                    subTitle: 'custom search state'),
               ];
             });
 }

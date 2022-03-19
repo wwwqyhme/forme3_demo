@@ -5,7 +5,7 @@ import 'package:forme/forme.dart';
 import 'package:forme_file_picker/forme_file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../exmaple.dart';
+import '../example.dart';
 import '../forme_screen.dart';
 
 class FormeImagePickerScreen extends FormeScreen {
@@ -19,7 +19,6 @@ class FormeImagePickerScreen extends FormeScreen {
                 Example(
                   subTitle: 'default',
                   formeKey: key,
-                  name: 'images1',
                   field: FormeImagePicker(
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -33,7 +32,6 @@ class FormeImagePickerScreen extends FormeScreen {
                   subTitle:
                       'camera support (not all service suppot capture with camera , default is false)',
                   formeKey: key,
-                  name: 'images2',
                   field: FormeImagePicker(
                     draggable: (item, index) => false,
                     supportCamera: true,
@@ -49,7 +47,6 @@ class FormeImagePickerScreen extends FormeScreen {
                 Example(
                   subTitle: 'display  network images',
                   formeKey: key,
-                  name: 'images3',
                   field: FormeImagePicker(
                     initialValue: [
                       _NImage(
@@ -68,7 +65,6 @@ class FormeImagePickerScreen extends FormeScreen {
                 Example(
                   subTitle: 'delete files with drag!',
                   formeKey: key,
-                  name: 'images4',
                   field: FormeImagePicker(
                     pickFromGallery: (max) => _pick(max, ImageSource.gallery),
                     showGridItemRemoveIcon: false,
@@ -83,7 +79,7 @@ class FormeImagePickerScreen extends FormeScreen {
                               ),
                               ValueListenableBuilder<bool>(
                                   valueListenable:
-                                      (field as FormeImagePickerFieldController)
+                                      (field as FormeImagePickerState)
                                           .draggingListenable,
                                   builder: (context, dragging, child) {
                                     if (dragging) {
@@ -124,7 +120,6 @@ class FormeImagePickerScreen extends FormeScreen {
                 Example(
                   subTitle: 'disable drag',
                   formeKey: key,
-                  name: 'images5',
                   field: FormeImagePicker(
                     pickFromGallery: (max) => _pick(max, ImageSource.gallery),
                     draggable: (item, index) => false,
@@ -138,7 +133,6 @@ class FormeImagePickerScreen extends FormeScreen {
                 Example(
                   subTitle: 'disable drag & remove first image',
                   formeKey: key,
-                  name: 'images6',
                   field: FormeImagePicker(
                     pickFromGallery: (max) => _pick(max, ImageSource.gallery),
                     initialValue: [
@@ -157,7 +151,6 @@ class FormeImagePickerScreen extends FormeScreen {
                 Example(
                   subTitle: 'validate? if you need',
                   formeKey: key,
-                  name: 'images7',
                   field: FormeImagePicker(
                     pickFromGallery: (max) => _pick(max, ImageSource.gallery),
                     autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -166,6 +159,7 @@ class FormeImagePickerScreen extends FormeScreen {
                       if (value.length < 2) {
                         return 'you must pick at least 2 images';
                       }
+                      return null;
                     },
                     maximum: 9,
                     gridDelegate:

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:forme/forme.dart';
 import 'package:forme_base_fields/forme_base_fields.dart';
 
-import '../exmaple.dart';
+import '../example.dart';
 import '../forme_screen.dart';
 
 class FormeTimeFieldScreen extends FormeScreen {
@@ -14,28 +15,23 @@ class FormeTimeFieldScreen extends FormeScreen {
                 Example(
                   subTitle: 'select date only',
                   formeKey: key,
-                  name: 'dateTime',
                   field: FormeDateTimeField(
                     decoration: InputDecoration(
-                        labelText: 'Date',
-                        suffixIcon: Builder(
-                          builder: (context) {
-                            return ValueListenableBuilder(
-                                valueListenable:
-                                    key.field('dateTime').valueListenable,
-                                builder: (context, value, child) {
-                                  if (value != null) {
-                                    return IconButton(
-                                      onPressed: () {
-                                        key.field('dateTime').value = null;
-                                      },
-                                      icon: const Icon(Icons.clear),
-                                    );
-                                  }
-                                  return const SizedBox.shrink();
-                                });
-                          },
-                        )),
+                      labelText: 'Date',
+                      suffixIcon: FormeFieldStatusListener(
+                        builder: (context, status, child) {
+                          if (status != null && status.value != null) {
+                            return IconButton(
+                              onPressed: () {
+                                key.field('dateTime').value = null;
+                              },
+                              icon: const Icon(Icons.clear),
+                            );
+                          }
+                          return const SizedBox.shrink();
+                        },
+                      ),
+                    ),
                     name: 'dateTime',
                   ),
                   title: 'FormeDateTimeField',
@@ -43,7 +39,6 @@ class FormeTimeFieldScreen extends FormeScreen {
                 Example(
                   subTitle: 'select both date and time',
                   formeKey: key,
-                  name: 'dateTime2',
                   field: FormeDateTimeField(
                     type: FormeDateTimeType.dateTime,
                     decoration: const InputDecoration(
@@ -56,7 +51,6 @@ class FormeTimeFieldScreen extends FormeScreen {
                 Example(
                   subTitle: 'custom formatter',
                   formeKey: key,
-                  name: 'dateTime3',
                   field: FormeDateTimeField(
                     formatter: (type, dateTime) {
                       switch (type) {
@@ -76,7 +70,6 @@ class FormeTimeFieldScreen extends FormeScreen {
                 Example(
                   subTitle: 'select time only',
                   formeKey: key,
-                  name: 'time',
                   field: FormeTimeField(
                     decoration: const InputDecoration(
                       labelText: 'Time',
@@ -88,7 +81,6 @@ class FormeTimeFieldScreen extends FormeScreen {
                 Example(
                   subTitle: 'select date-range',
                   formeKey: key,
-                  name: 'range',
                   field: FormeDateTimeRangeField(
                     decoration: const InputDecoration(
                       labelText: 'Date-Time-Range',

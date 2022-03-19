@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
 import 'package:forme_base_fields/forme_base_fields.dart';
 
-import '../exmaple.dart';
+import '../example.dart';
 import '../forme_screen.dart';
 
 class FormeNumberFieldScreen extends FormeScreen {
@@ -14,7 +14,6 @@ class FormeNumberFieldScreen extends FormeScreen {
               return [
                 Example(
                   formeKey: key,
-                  name: 'number',
                   field: FormeNumberField(
                     decoration: const InputDecoration(labelText: 'Number'),
                     autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -35,7 +34,6 @@ class FormeNumberFieldScreen extends FormeScreen {
                 Example(
                   subTitle: 'allow decimal',
                   formeKey: key,
-                  name: 'number2',
                   field: FormeNumberField(
                     decoration: const InputDecoration(labelText: 'Number'),
                     decimal: 2,
@@ -48,7 +46,6 @@ class FormeNumberFieldScreen extends FormeScreen {
                 Example(
                   subTitle: 'allow negative',
                   formeKey: key,
-                  name: 'number3',
                   field: FormeNumberField(
                     decoration: const InputDecoration(labelText: 'Number'),
                     decimal: 2,

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:forme/forme.dart';
 import 'package:forme_base_fields/forme_base_fields.dart';
 
-import '../cupertino_exmaple.dart';
+import '../cupertino_example.dart';
 import '../forme_screen.dart';
 
 class FormeCupertinoNumberTextFieldScreen extends FormeScreen {
@@ -25,7 +25,7 @@ class FormeCupertinoNumberTextFieldScreen extends FormeScreen {
                   buttons: [
                     CupertinoButton(
                         onPressed: () {
-                          key.field('number').value = 9999;
+                          key.field('number').value = 1000;
                         },
                         child: const Text('set value to 1000'))
                   ],

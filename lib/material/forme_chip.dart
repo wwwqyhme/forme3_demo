@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
 import 'package:forme_base_fields/forme_base_fields.dart';
 
-import '../exmaple.dart';
+import '../example.dart';
 import '../forme_screen.dart';
 
 class FormeChipScreen extends FormeScreen {
@@ -36,7 +36,6 @@ class FormeChipScreen extends FormeScreen {
               return [
                 Example(
                   formeKey: key,
-                  name: 'filter-chip',
                   field: FormeFilterChip<Tech>(
                     decorator: FormeInputDecoratorBuilder(
                         decoration:
@@ -60,7 +59,6 @@ class FormeChipScreen extends FormeScreen {
                 Example(
                   subTitle: 'max selected count 2',
                   formeKey: key,
-                  name: 'filter-chip2',
                   field: FormeFilterChip<Tech>(
                     maxSelectedCount: 2,
                     maxSelectedExceedCallback: () {
@@ -87,7 +85,6 @@ class FormeChipScreen extends FormeScreen {
                 ),
                 Example(
                   formeKey: key,
-                  name: 'choice-chip2',
                   field: FormeChoiceChip<Tech>(
                     decorator: FormeInputDecoratorBuilder(
                         decoration:

@@ -4,7 +4,7 @@ import 'package:forme_fields/forme_fields.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:forme_base_fields/forme_base_fields.dart';
 
-import '../exmaple.dart';
+import '../example.dart';
 import '../forme_screen.dart';
 
 class FormeRatingBarScreen extends FormeScreen {
@@ -16,7 +16,6 @@ class FormeRatingBarScreen extends FormeScreen {
               return [
                 Example(
                   formeKey: key,
-                  name: 'rating',
                   field: FormeRatingBar(
                     decorator: const FormeInputDecoratorBuilder(
                         decoration: InputDecoration(labelText: 'Rating Bar')),
@@ -37,7 +36,6 @@ class FormeRatingBarScreen extends FormeScreen {
                 ),
                 Example(
                   formeKey: key,
-                  name: 'rating2',
                   field: FormeRatingBar(
                     name: 'rating2',
                     initialValue: 3,
@@ -56,7 +54,6 @@ class FormeRatingBarScreen extends FormeScreen {
                 ),
                 Example(
                   formeKey: key,
-                  name: 'rating3',
                   field: FormeRatingBar(
                     name: 'rating3',
                     initialValue: 3,
@@ -106,30 +103,35 @@ class FormeRatingBarScreen extends FormeScreen {
                 ),
                 Example(
                   formeKey: key,
-                  name: 'rating4',
-                  field: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FormeRatingBarIndicator(
-                        name: 'rating4',
-                        initialValue: 2.3,
-                        itemCount: 5,
-                        itemSize: 50.0,
-                      ),
-                      FormeNumberField(
-                        name: '',
-                        registrable: false,
-                        initialValue: 2.3,
-                        decimal: 1,
-                        max: 5,
-                        decoration: const InputDecoration(labelText: 'Rating'),
-                        onValueChanged: (f, v) {
-                          if (v != null) {
-                            key.field('rating4').value = v.toDouble();
-                          }
-                        },
-                      ),
-                    ],
+                  field: FormeRatingBarIndicator(
+                    decorator:
+                        FormeInputDecoratorBuilder(wrapper: (child, field) {
+                      return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            child,
+                            FormeNumberField(
+                              name: '',
+                              registrable: false,
+                              initialValue: 2.3,
+                              decimal: 1,
+                              max: 5,
+                              decoration: const InputDecoration(
+                                  labelText: 'Rating',
+                                  border: InputBorder.none),
+                              onStatusChanged: (f, v) {
+                                if (v.isValueChanged && v.value != null) {
+                                  key.field('rating4').value =
+                                      v.value!.toDouble();
+                                }
+                              },
+                            ),
+                          ]);
+                    }),
+                    name: 'rating4',
+                    initialValue: 2.3,
+                    itemCount: 5,
+                    itemSize: 50.0,
                   ),
                   subTitle: 'Example4',
                   title: 'FormeRatingBar',

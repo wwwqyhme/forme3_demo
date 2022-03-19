@@ -5,7 +5,7 @@ import 'package:forme/forme.dart';
 import 'package:forme_fields/forme_fields.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-import '../exmaple.dart';
+import '../example.dart';
 import '../forme_screen.dart';
 
 class FormePinCodeTextFieldScreen extends FormeScreen {
@@ -24,7 +24,6 @@ class FormePinCodeTextFieldScreen extends FormeScreen {
               return [
                 Example(
                   formeKey: key,
-                  name: 'pin',
                   buttons: [
                     TextButton(
                       onPressed: () {
