@@ -113,30 +113,37 @@ packages:
       name: forme
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0"
+    version: "4.0.2"
   forme_base_fields:
     dependency: "direct main"
     description:
       name: forme_base_fields
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
   forme_fields:
     dependency: "direct main"
     description:
       name: forme_fields
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
   forme_file_picker:
     dependency: "direct main"
     description:
       name: forme_file_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
+  forme_searchable:
+    dependency: "direct dev"
+    description:
+      path: "../forme/forme_searchable"
+      relative: true
+    source: path
+    version: "1.0.0"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       url: "https://pub.dartlang.org"
