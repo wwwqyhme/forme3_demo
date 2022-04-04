@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
-import 'package:forme_base_fields/field/material/forme_switch.dart';
-import 'package:forme_base_fields/field/material/forme_text_field.dart';
+import 'package:forme_base_fields/forme_base_fields.dart';
+import 'package:forme_demo/other/infinite_scroll_pagination_content.dart';
 import 'package:forme_searchable/forme_searchable.dart';
 
 import '../example.dart';
@@ -35,17 +35,39 @@ class FormeSearchableScreen extends FormeScreen {
   FormeSearchableScreen({Key? key})
       : super(
             key: key,
-            title: 'FormeRatingBar',
+            title: 'FormeSearchable',
             builder: (context, key) {
               return [
                 Example(
                   formeKey: key,
+                  field: FormeSearchable<String>.base(
+                    name: 'base',
+                    query: (condition) {
+                      return Future.delayed(const Duration(seconds: 2), () {
+                        return FormeSearchablePageResult<String>(
+                            List.generate(50, (index) => '$index'), 2);
+                      });
+                    },
+                  ),
+                  title: 'Base',
+                ),
+                Example(
+                  formeKey: key,
+                  field: FormeSearchable<String>.overlay(
+                    name: 'overlay',
+                    query: (condition) {
+                      return Future.delayed(const Duration(seconds: 2), () {
+                        return FormeSearchablePageResult<String>(
+                            List.generate(50, (index) => '$index'), 2);
+                      });
+                    },
+                  ),
+                  title: 'Overlay',
+                ),
+                Example(
+                  formeKey: key,
                   field: FormeSearchable<String>.bottomSheet(
                     name: 'bottomSheet',
-                    queryFilter: (condition) {
-                      final String? query = condition.getCondition('query');
-                      return query != null && query.isNotEmpty;
-                    },
                     query: (condition) {
                       return Future.delayed(const Duration(seconds: 2), () {
                         return FormeSearchablePageResult<String>(
@@ -64,10 +86,6 @@ class FormeSearchableScreen extends FormeScreen {
                       return Size(
                           data.size.width * 0.8, data.size.height * 0.8);
                     }),
-                    queryFilter: (condition) {
-                      final String? query = condition.getCondition('query');
-                      return query != null && query.isNotEmpty;
-                    },
                     query: (condition) {
                       return Future.delayed(const Duration(seconds: 2), () {
                         return FormeSearchablePageResult<String>(
@@ -75,50 +93,60 @@ class FormeSearchableScreen extends FormeScreen {
                       });
                     },
                   ),
-                  subTitle: 'Example2',
                   title: 'Dialog',
                 ),
                 Example(
                   formeKey: key,
-                  field: FormeSearchable<String>.dialog(
+                  field: FormeSearchable<Todo>.dialog(
                     name: 'searchFields',
                     queryFilter: (condition) {
                       final String? query = condition.getCondition('query');
                       return query != null && query.isNotEmpty;
                     },
+                    optionWidgetBuilder: (context, todo, isSelected) {
+                      return ListTile(
+                        title: Text(todo.title),
+                        leading: isSelected ? const Icon(Icons.check) : null,
+                        trailing:
+                            todo.isCompleted ? const Text('completed') : null,
+                      );
+                    },
+                    displayStringForOption: (todo) => todo.title,
                     dialogConfiguration:
                         FormeDialogConfiguration(sizeProvider: (context, data) {
                       return Size(
                           data.size.width * 0.8, data.size.height * 0.8);
                     }),
-                    query: (condition) {
-                      return Future.delayed(const Duration(seconds: 2), () {
-                        return FormeSearchablePageResult<String>(
-                            List.generate(50, (index) => '$index'), 2);
-                      });
+                    query: (condition) async {
+                      final List<Todo> todos = await fetchTodos(condition);
+                      return FormeSearchablePageResult(todos, 1);
                     },
-                    searchFieldsBuilder: (context, query, key) {
-                      return Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Forme(
-                          onFieldStatusChanged: query == null
-                              ? null
-                              : (state, status) {
-                                  if (status.isValueChanged) {
-                                    query();
-                                  }
-                                },
-                          key: key,
-                          child: Row(children: [
-                            Expanded(
-                                child: FormeTextField(
-                              name: 'query',
-                              decoration:
-                                  const InputDecoration(labelText: 'search'),
-                            )),
-                            FormeSwitch(name: 'caseSensitive')
-                          ]),
-                        ),
+                    searchFieldsBuilder: (context) {
+                      return FormeSearchableSearchFields<Todo>(
+                        builder: (key, context, query) {
+                          return Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Forme(
+                              onFieldStatusChanged: query == null
+                                  ? null
+                                  : (state, status) {
+                                      if (status.isValueChanged) {
+                                        query();
+                                      }
+                                    },
+                              key: key,
+                              child: Row(children: [
+                                Expanded(
+                                    child: FormeTextField(
+                                  name: 'query',
+                                  decoration: const InputDecoration(
+                                      labelText: 'search'),
+                                )),
+                                FormeSwitch(name: 'completed')
+                              ]),
+                            ),
+                          );
+                        },
                       );
                     },
                   ),
@@ -126,74 +154,12 @@ class FormeSearchableScreen extends FormeScreen {
                 ),
                 Example(
                   formeKey: key,
-                  field: FormeSearchable<Todo>.bottomSheet(
-                    name: 'display',
-                    queryFilter: (condition) {
-                      final String? query = condition.getCondition('query');
-                      return query != null && query.isNotEmpty;
-                    },
-                    query: (condition) async {
-                      final List<Todo> todos = await fetchTodos(condition);
-                      return FormeSearchablePageResult(todos, 1);
-                    },
-                    displayStringForOption: (todo) => todo.title,
-                    optionWidgetBuilder: (context, todo, isSelected) {
-                      return ListTile(
-                        trailing: todo.isCompleted
-                            ? const Text(
-                                'completed',
-                                style: TextStyle(color: Colors.greenAccent),
-                              )
-                            : null,
-                        title: Text(todo.title),
-                        leading: isSelected ? const Icon(Icons.check) : null,
-                      );
-                    },
-                    searchFieldsBuilder: (context, query, key) {
-                      return Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Forme(
-                          onFieldStatusChanged: query == null
-                              ? null
-                              : (state, status) {
-                                  if (status.isValueChanged) {
-                                    query();
-                                  }
-                                },
-                          key: key,
-                          child: Row(children: [
-                            Expanded(
-                                child: FormeTextField(
-                              autofocus: true,
-                              name: 'query',
-                              decoration:
-                                  const InputDecoration(labelText: 'search'),
-                            )),
-                            FormeSwitch(name: 'completed')
-                          ]),
-                        ),
-                      );
-                    },
-                  ),
-                  title: 'Custom display',
-                ),
-                Example(
-                  formeKey: key,
-                  field: FormeSearchable<Todo>.dialog(
+                  field: FormeSearchable<Todo>.base(
                     maximum: 1,
                     name: 'single',
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (state, value) {
                       return value.isEmpty ? 'pls select' : null;
-                    },
-                    dialogConfiguration:
-                        FormeDialogConfiguration(sizeProvider: (context, data) {
-                      return Size(
-                          data.size.width * 0.8, data.size.height * 0.8);
-                    }),
-                    queryFilter: (condition) {
-                      final String? query = condition.getCondition('query');
-                      return query != null && query.isNotEmpty;
                     },
                     query: (condition) async {
                       final List<Todo> todos = await fetchTodos(condition);
@@ -202,6 +168,56 @@ class FormeSearchableScreen extends FormeScreen {
                     displayStringForOption: (todo) => todo.title,
                   ),
                   title: 'Single select',
+                ),
+                Example(
+                  formeKey: key,
+                  field: FormeSearchable<Todo>.base(
+                    maximum: 1,
+                    name: 'filter',
+                    decoration: const InputDecoration(labelText: '123'),
+                    query: (condition) async {
+                      final List<Todo> todos = await fetchTodos(condition);
+                      return FormeSearchablePageResult(todos, 1);
+                    },
+                    queryFilter: (condition) {
+                      final String? query = condition.getCondition('query');
+                      return query != null && query.isNotEmpty;
+                    },
+                    displayStringForOption: (todo) => todo.title,
+                  ),
+                  subTitle: 'prevent query when text field is empty',
+                  title: 'Query Filter',
+                ),
+                Example(
+                  formeKey: key,
+                  field: FormeSearchable<String>.dialog(
+                    dialogConfiguration: FormeDialogConfiguration(
+                        performSearchAfterOpen: false,
+                        sizeProvider: (context, data) {
+                          return Size(
+                              data.size.width * 0.8, data.size.height * 0.8);
+                        }),
+                    name: 'infinite',
+                    decoration: const InputDecoration(labelText: 'infinite'),
+                    query: (condition) {
+                      return Future.delayed(const Duration(seconds: 2), () {
+                        return FormeSearchablePageResult<String>(
+                            List.generate(20,
+                                (index) => '${20 * condition.page + index}'),
+                            10);
+                      });
+                    },
+                    queryFilter: (condition) {
+                      final String? query = condition.getCondition('query');
+                      return query != null && query.isNotEmpty;
+                    },
+                    paginationBarBuilder: (context) => const SizedBox(),
+                    contentBuilder: (context) {
+                      return const InfiniteScrollPaginationContentView<
+                          String>();
+                    },
+                  ),
+                  title: 'Infinite pagination scroll',
                 ),
               ];
             });

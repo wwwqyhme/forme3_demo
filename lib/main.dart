@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
         '/FormeImagePicker': (context) => FormeImagePickerScreen(),
         '/FormeAutocomplete': (context) => FormeAutocompleteScreen(),
         '/FormeAsyncInputChip': (context) => FormeAsyncInputChipScreen(),
-        '/FormeSearchableScreen': (context) => FormeSearchableScreen(),
+        '/FormeSearchable': (context) => FormeSearchableScreen(),
         '/Signup': (context) => const Signup(),
       },
     );
@@ -214,7 +214,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   title: FieldLink('FormeAsyncInputChip'),
                 ),
                 ListTile(
-                  title: FieldLink('FormeSearchableScreen'),
+                  title: FieldLink('FormeSearchable'),
                 ),
               ],
             ),
