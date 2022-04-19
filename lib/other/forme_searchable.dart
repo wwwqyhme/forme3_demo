@@ -12,8 +12,8 @@ import 'package:http/http.dart' as http;
 
 class FormeSearchableScreen extends FormeScreen {
   static Future<List<Todo>> fetchTodos(FormeSearchCondition condition) async {
-    final String? query = condition.getCondition('query');
-    final bool completed = condition.getCondition('completed') ?? false;
+    final String? query = condition.getFilter('query');
+    final bool completed = condition.getFilter('completed') ?? false;
     final http.Response response =
         await http.get(Uri.parse('https://jsonplaceholder.typicode.com/todos'));
     if (response.statusCode == 200) {
@@ -100,7 +100,7 @@ class FormeSearchableScreen extends FormeScreen {
                   field: FormeSearchable<Todo>.dialog(
                     name: 'searchFields',
                     queryFilter: (condition) {
-                      final String? query = condition.getCondition('query');
+                      final String? query = condition.getFilter('query');
                       return query != null && query.isNotEmpty;
                     },
                     optionWidgetBuilder: (context, todo, isSelected) {
@@ -180,7 +180,7 @@ class FormeSearchableScreen extends FormeScreen {
                       return FormeSearchablePageResult(todos, 1);
                     },
                     queryFilter: (condition) {
-                      final String? query = condition.getCondition('query');
+                      final String? query = condition.getFilter('query');
                       return query != null && query.isNotEmpty;
                     },
                     displayStringForOption: (todo) => todo.title,
@@ -208,7 +208,7 @@ class FormeSearchableScreen extends FormeScreen {
                       });
                     },
                     queryFilter: (condition) {
-                      final String? query = condition.getCondition('query');
+                      final String? query = condition.getFilter('query');
                       return query != null && query.isNotEmpty;
                     },
                     paginationBarBuilder: (context) => const SizedBox(),

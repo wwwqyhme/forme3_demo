@@ -113,14 +113,14 @@ packages:
       name: forme
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.2"
+    version: "4.1.1"
   forme_base_fields:
     dependency: "direct main"
     description:
       name: forme_base_fields
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "2.2.0-beta.1"
   forme_fields:
     dependency: "direct main"
     description:

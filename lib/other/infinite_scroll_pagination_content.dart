@@ -68,8 +68,8 @@ class _InfiniteScrollPaginationContentViewState<T extends Object>
   }
 
   @override
-  void onConditionChangeStart(FormeSearchCondition condition) {
-    super.onConditionChangeStart(condition);
+  void onFilterChanged(FormeSearchCondition condition) {
+    super.onFilterChanged(condition);
     _pagingController.value =
         PagingState<int, T>(nextPageKey: 1, itemList: null);
   }
