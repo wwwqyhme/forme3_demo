@@ -21,7 +21,6 @@ import 'other/forme_autocomplete.dart';
 import 'other/forme_image_picker.dart';
 import 'other/forme_pin_code.dart';
 import 'other/forme_rating_bar.dart';
-import 'other/forme_searchable.dart';
 import 'other/forme_spin_number.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -73,7 +72,6 @@ class MyApp extends StatelessWidget {
         '/FormeImagePicker': (context) => FormeImagePickerScreen(),
         '/FormeAutocomplete': (context) => FormeAutocompleteScreen(),
         '/FormeAsyncInputChip': (context) => FormeAsyncInputChipScreen(),
-        '/FormeSearchable': (context) => FormeSearchableScreen(),
         '/FormeExpansionListTile': (context) => FormeExpansionListTileScreen(),
         '/Signup': (context) => const Signup(),
       },
@@ -217,9 +215,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 ListTile(
                   title: FieldLink('FormeAsyncInputChip'),
-                ),
-                ListTile(
-                  title: FieldLink('FormeSearchable'),
                 ),
               ],
             ),
