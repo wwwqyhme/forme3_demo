@@ -18,7 +18,7 @@ import 'material/forme_switch.dart';
 import 'material/forme_time.dart';
 import 'other/forme_async_input_chip.dart';
 import 'other/forme_autocomplete.dart';
-import 'other/forme_image_picker.dart';
+import 'other/forme_file_grid.dart';
 import 'other/forme_pin_code.dart';
 import 'other/forme_rating_bar.dart';
 import 'other/forme_spin_number.dart';
@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
         '/FormeRatingBar': (context) => FormeRatingBarScreen(),
         '/FormeSpinNumberField': (context) => FormeSpinNumberFieldScreen(),
         '/FormePinCodeTextField': (context) => FormePinCodeTextFieldScreen(),
-        '/FormeImagePicker': (context) => FormeImagePickerScreen(),
+        '/FormeFileGrid': (context) => FormeFileGridScreen(),
         '/FormeAutocomplete': (context) => FormeAutocompleteScreen(),
         '/FormeAsyncInputChip': (context) => FormeAsyncInputChipScreen(),
         '/FormeExpansionListTile': (context) => FormeExpansionListTileScreen(),
@@ -208,7 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   title: FieldLink('FormePinCodeTextField'),
                 ),
                 ListTile(
-                  title: FieldLink('FormeImagePicker'),
+                  title: FieldLink('FormeFileGrid'),
                 ),
                 ListTile(
                   title: FieldLink('FormeAutocomplete'),
@@ -229,8 +229,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontSize: 16,
                           decoration: TextDecoration.underline,
                           color: Colors.blue)),
-                  onTap: () =>
-                      launch('https://github.com/wwwqyhme/forme3_demo')),
+                  onTap: () => launchUrl(
+                      Uri.parse('https://github.com/wwwqyhme/forme3_demo'))),
             ),
           ],
         ),

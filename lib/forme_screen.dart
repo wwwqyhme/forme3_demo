@@ -50,8 +50,8 @@ class FormeScreenState extends State<FormeScreen> {
             if (widget.sourceCode != null)
               IconButton(
                   onPressed: () {
-                    launch(
-                        'https://github.com/wwwqyhme/forme3_demo/blob/main/lib/${widget.sourceCode!}.dart');
+                    launchUrl(Uri.parse(
+                        'https://github.com/wwwqyhme/forme3_demo/blob/main/lib/${widget.sourceCode!}.dart'));
                   },
                   icon: const Icon(Icons.source)),
             Expanded(

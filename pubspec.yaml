@@ -35,14 +35,18 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   url_launcher: ^6.0.20
-  # forme_base_fields: ^2.2.0-beta.1
   forme_fields: ^2.0.2
   forme: ^4.1.2
-  forme_file_picker: ^2.0.2
+  forme_file_picker: ^3.0.0-beta.1+1
   image_picker: ^0.8.4+9
   http: ^0.13.4
   infinite_scroll_pagination: ^3.1.0
   forme_base_fields: ^2.2.1
+  forme_fluent:
+    path: ../forme/forme_fluent
+  qiniu_flutter_sdk: ^0.4.0
+  file_picker: ^4.6.1
+  video_player: ^2.4.5
 
 dev_dependencies:
   flutter_test:

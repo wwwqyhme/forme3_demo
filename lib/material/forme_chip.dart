@@ -62,7 +62,7 @@ class FormeChipScreen extends FormeScreen {
                   field: FormeFilterChip<Tech>(
                     maxSelectedCount: 2,
                     maxSelectedExceedCallback: () {
-                      print('max select count is 2');
+                      debugPrint('max select count is 2');
                     },
                     decorator: FormeInputDecoratorBuilder(
                         decoration:
