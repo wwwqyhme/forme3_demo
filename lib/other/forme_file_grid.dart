@@ -28,7 +28,7 @@ class FormeFileGridScreen extends FormeScreen {
                   field: FormeFileGrid(
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 150),
+                            maxCrossAxisExtent: 150, crossAxisSpacing: 10),
                     name: 'images1',
                     pickFiles: (state, max) =>
                         _pick(state, max, ImageSource.gallery),
@@ -47,7 +47,7 @@ class FormeFileGridScreen extends FormeScreen {
                     ],
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 150),
+                            maxCrossAxisExtent: 150, crossAxisSpacing: 10),
                     name: 'images2',
                     pickFiles: (state, max) =>
                         _pick(state, max, ImageSource.gallery),
@@ -60,7 +60,7 @@ class FormeFileGridScreen extends FormeScreen {
                   field: FormeFileGrid(
                     pickFiles: (state, max) =>
                         _pick(state, max, ImageSource.gallery),
-                    showGridItemRemoveIcon: false,
+                    showGridItemRemoveWidget: false,
                     decorator: FormeInputDecoratorBuilder(
                         decoration: const InputDecoration(labelText: 'Images'),
                         wrapper: (child, field) {
@@ -102,8 +102,8 @@ class FormeFileGridScreen extends FormeScreen {
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 150,
-                      mainAxisSpacing: 10,
                       crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
                     ),
                     name: 'images3',
                   ),
@@ -118,7 +118,7 @@ class FormeFileGridScreen extends FormeScreen {
                     draggable: (item, index) => false,
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 150),
+                            maxCrossAxisExtent: 150, crossAxisSpacing: 10),
                     name: 'images4',
                   ),
                   title: 'FormeFileGrid4',
@@ -137,7 +137,7 @@ class FormeFileGridScreen extends FormeScreen {
                     removable: (item, index) => index != 0,
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 150),
+                            maxCrossAxisExtent: 150, crossAxisSpacing: 10),
                     name: 'images5',
                   ),
                   title: 'FormeFileGrid5',
@@ -159,7 +159,7 @@ class FormeFileGridScreen extends FormeScreen {
                     maximum: 9,
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 150),
+                            maxCrossAxisExtent: 150, crossAxisSpacing: 10),
                     name: 'images6',
                   ),
                   title: 'FormeFileGrid6',
@@ -188,7 +188,7 @@ class FormeFileGridScreen extends FormeScreen {
                     disableFilePicker: true,
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 150),
+                            maxCrossAxisExtent: 150, crossAxisSpacing: 10),
                     name: 'images7',
                     pickFiles: (state, max) =>
                         _pick(state, max, ImageSource.gallery),
@@ -207,7 +207,7 @@ class FormeFileGridScreen extends FormeScreen {
                     maximum: 9,
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 150),
+                            maxCrossAxisExtent: 150, crossAxisSpacing: 10),
                     name: 'images8',
                   ),
                   title: 'FormeFileGrid8',
@@ -224,7 +224,7 @@ class FormeFileGridScreen extends FormeScreen {
                     maximum: 9,
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 150),
+                            maxCrossAxisExtent: 150, crossAxisSpacing: 10),
                     name: 'images9',
                   ),
                   title: 'FormeFileGrid9',
@@ -287,7 +287,7 @@ class FormeFileGridScreen extends FormeScreen {
                     ),
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 150),
+                            maxCrossAxisExtent: 150, crossAxisSpacing: 10),
                     name: 'images10',
                   ),
                   title: 'FormeFileGrid10',
