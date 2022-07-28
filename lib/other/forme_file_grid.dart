@@ -233,8 +233,13 @@ class FormeFileGridScreen extends FormeScreen {
                   subTitle: 'global upload control',
                   formeKey: key,
                   field: FormeFileGrid(
+                    onUploadSuccess: (a, b) {
+                      debugPrint(b);
+                    },
+                    onUploadFail: (_, __, stack) {
+                      debugPrintStack(stackTrace: stack);
+                    },
                     pickFiles: (state, max) {},
-                    maximum: 1,
                     decorator: FormeInputDecoratorBuilder(
                       wrapper: (child, field) {
                         return Column(
@@ -251,7 +256,7 @@ class FormeFileGridScreen extends FormeScreen {
                                   icon: const Icon(Icons.file_copy),
                                 ),
                                 if (field.value
-                                    .where((element) => element.uploadable)
+                                    .whereType<UploadableFormeFile>()
                                     .isNotEmpty)
                                   IconButton(
                                     onPressed: () async {
@@ -263,7 +268,7 @@ class FormeFileGridScreen extends FormeScreen {
                                     icon: const Icon(Icons.upload),
                                   ),
                                 if (field.value
-                                    .where((element) => element.isUploading)
+                                    .whereType<UploadableFormeFile>()
                                     .isNotEmpty)
                                   IconButton(
                                     onPressed: () async {
@@ -298,7 +303,7 @@ void _pick(
   bool uploadable = false,
   bool autoUpload = false,
 }) async {
-  _XFileFormeImage toXFileImage(XFile e) {
+  FormeFile toXFileImage(XFile e) {
     if (uploadable) {
       if (autoUpload) {
         return _AutouploadXFileFormeImage(e);
@@ -327,7 +332,7 @@ class _NImage extends FormeFile {
   _NImage(this.url);
   @override
   Future<ImageProvider<Object>> get thumbnail async {
-    return NetworkImage(url);
+    return NetworkImage(url + "?time=123534ccx");
   }
 }
 
@@ -344,14 +349,13 @@ class _XFileFormeImage extends FormeFile {
   Future<Uint8List> readAsBytes() => xFile.readAsBytes();
 }
 
-class _UploadableXFileFormeImage extends _XFileFormeImage {
-  _UploadableXFileFormeImage(XFile xFile) : super(xFile);
+class _UploadableXFileFormeImage extends UploadableFormeFile<String> {
+  final XFile xFile;
+  _UploadableXFileFormeImage(this.xFile);
   CloseableMultipartRequest? _request;
   HttpClient? client;
   @override
-  bool get uploadable => true;
-  @override
-  Future upload() async {
+  Future<String> upload() async {
     _request = CloseableMultipartRequest(
         "POST", Uri.parse("https://api.qyh.me/api/file"));
     _request!.files.add(http.MultipartFile.fromBytes(
@@ -359,7 +363,7 @@ class _UploadableXFileFormeImage extends _XFileFormeImage {
       await xFile.readAsBytes(),
       filename: "upload",
     ));
-    Completer<String?> completer = Completer();
+    Completer<String> completer = Completer();
     try {
       http.StreamedResponse response = await _request!.send();
       if (response.statusCode == 200) {
@@ -376,6 +380,12 @@ class _UploadableXFileFormeImage extends _XFileFormeImage {
   @override
   void cancelUpload() {
     _request?.close();
+  }
+
+  @override
+  Future<ImageProvider<Object>> get thumbnail async {
+    return Future.delayed(
+        Duration.zero, () async => MemoryImage(await xFile.readAsBytes()));
   }
 }
 

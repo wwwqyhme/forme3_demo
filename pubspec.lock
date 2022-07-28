@@ -178,17 +178,17 @@ packages:
   forme_file_picker:
     dependency: "direct main"
     description:
-      name: forme_file_picker
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "3.0.0-beta.1+1"
+      path: "../forme/forme_file_picker"
+      relative: true
+    source: path
+    version: "3.0.0-beta.2"
   forme_fluent:
     dependency: "direct main"
     description:
-      path: "../forme/forme_fluent"
-      relative: true
-    source: path
-    version: "1.0.0-pre.0"
+      name: forme_fluent
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0"
   html:
     dependency: transitive
     description:
