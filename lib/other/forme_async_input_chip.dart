@@ -72,7 +72,7 @@ class FormeAsyncInputChipScreen extends FormeScreen {
                     },
                     asyncValidator: asyncValidator,
                     inputChipBuilder: inputChipBuilder,
-                    decoration: const InputDecoration(
+                    fieldViewDecoration: const InputDecoration(
                         labelText: 'FormeAsyncInputChip',
                         suffixIconConstraints: BoxConstraints.tightFor()),
                     name: 'asyncInputChip',
@@ -117,7 +117,7 @@ class FormeAsyncInputChipScreen extends FormeScreen {
                     validator: validator,
                     asyncValidator: asyncValidator,
                     inputChipBuilder: inputChipBuilder,
-                    decoration: const InputDecoration(
+                    fieldViewDecoration: const InputDecoration(
                         labelText: 'FormeAsyncInputChip',
                         suffixIconConstraints: BoxConstraints.tightFor()),
                     name: 'asyncInputChip2',
@@ -145,7 +145,7 @@ class FormeAsyncInputChipScreen extends FormeScreen {
                     },
                     asyncValidator: asyncValidator,
                     inputChipBuilder: inputChipBuilder,
-                    decoration: const InputDecoration(
+                    fieldViewDecoration: const InputDecoration(
                         labelText: 'FormeAsyncInputChip',
                         suffixIconConstraints: BoxConstraints.tightFor()),
                     name: 'asyncInputChip3',

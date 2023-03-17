@@ -37,12 +37,14 @@ class FormeChipScreen extends FormeScreen {
                 Example(
                   formeKey: key,
                   field: FormeFilterChip<Tech>(
-                    decorator: FormeInputDecoratorBuilder(
-                        decoration:
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: FormeValidates.notEmpty(errorText: 'required'),
+                    decorator: FormeInputDecorationDecorator(
+                        decorationBuilder: (context) =>
                             const InputDecoration(labelText: 'FormeFilterChip'),
-                        wrapper: (w, controller) => Padding(
+                        childBuilder: (context, child) => Padding(
                               padding: const EdgeInsets.all(10),
-                              child: w,
+                              child: child,
                             )),
                     items: _chipsList.map((e) {
                       return FormeChipItem(
@@ -64,12 +66,12 @@ class FormeChipScreen extends FormeScreen {
                     maxSelectedExceedCallback: () {
                       debugPrint('max select count is 2');
                     },
-                    decorator: FormeInputDecoratorBuilder(
-                        decoration:
+                    decorator: FormeInputDecorationDecorator(
+                        decorationBuilder: (context) =>
                             const InputDecoration(labelText: 'FormeFilterChip'),
-                        wrapper: (w, controller) => Padding(
+                        childBuilder: (context, child) => Padding(
                               padding: const EdgeInsets.all(10),
-                              child: w,
+                              child: child,
                             )),
                     items: _chipsList.map((e) {
                       return FormeChipItem(
@@ -86,12 +88,12 @@ class FormeChipScreen extends FormeScreen {
                 Example(
                   formeKey: key,
                   field: FormeChoiceChip<Tech>(
-                    decorator: FormeInputDecoratorBuilder(
-                        decoration:
+                    decorator: FormeInputDecorationDecorator(
+                        decorationBuilder: (context) =>
                             const InputDecoration(labelText: 'FormeChoiceChip'),
-                        wrapper: (w, controller) => Padding(
+                        childBuilder: (context, child) => Padding(
                               padding: const EdgeInsets.all(10),
-                              child: w,
+                              child: child,
                             )),
                     items: _chipsList.map((e) {
                       return FormeChipItem(

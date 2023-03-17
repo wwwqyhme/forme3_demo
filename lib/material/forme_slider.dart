@@ -14,10 +14,27 @@ class FormeSliderScreen extends FormeScreen {
                 Example(
                   formeKey: key,
                   field: FormeSlider(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (field, value) {
+                      return 'always error';
+                    },
                     decoration: const InputDecoration(labelText: 'FormeSlider'),
                     min: 1,
                     max: 100,
                     name: 'slider',
+                  ),
+                  title: 'FormeSlider',
+                ),
+                Example(
+                  formeKey: key,
+                  subTitle: 'secondaryTrackValue',
+                  field: FormeSlider(
+                    decoration: const InputDecoration(labelText: 'FormeSlider'),
+                    min: 1,
+                    max: 100,
+                    name: 'slider3',
+                    secondaryTrackValue: 50,
+                    secondaryActiveColor: Colors.red,
                   ),
                   title: 'FormeSlider',
                 ),

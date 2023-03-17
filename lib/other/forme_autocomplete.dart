@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
+import 'package:forme_base_fields/forme_base_fields.dart';
 import 'package:forme_fields/forme_fields.dart';
 
 import '../example.dart';
@@ -41,7 +42,8 @@ class FormeAutocompleteScreen extends FormeScreen {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: validator,
                       asyncValidator: asyncValidator,
-                      decoration: const InputDecoration(labelText: 'Search'),
+                      fieldViewDecoration:
+                          const InputDecoration(labelText: 'Search'),
                       optionsBuilder: search,
                       name: 'autocomplete',
                     ),

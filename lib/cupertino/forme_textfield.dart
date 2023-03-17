@@ -17,12 +17,6 @@ class FormeCupertinoTextFieldScreen extends FormeScreen {
                     name: 'text-field',
                     title: 'FormeCupertinoTextField',
                     field: FormeCupertinoTextField(
-                      decorator: const FormeCupertinoInputDecoratorBuilder(
-                        prefix: Padding(
-                          padding: EdgeInsets.only(right: 20),
-                          child: Text('Text'),
-                        ),
-                      ),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       name: 'text-field',
                       suffix: Builder(builder: (context) {
@@ -96,12 +90,6 @@ class FormeCupertinoTextFieldScreen extends FormeScreen {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       name: 'obscureText',
                       maxLength: 20,
-                      decorator: const FormeCupertinoInputDecoratorBuilder(
-                        prefix: Padding(
-                          padding: EdgeInsets.only(right: 20),
-                          child: Text('ObscureText'),
-                        ),
-                      ),
                     )),
               ];
             });

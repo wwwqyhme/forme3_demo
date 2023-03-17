@@ -17,8 +17,9 @@ class FormeRatingBarScreen extends FormeScreen {
                 Example(
                   formeKey: key,
                   field: FormeRatingBar(
-                    decorator: const FormeInputDecoratorBuilder(
-                        decoration: InputDecoration(labelText: 'Rating Bar')),
+                    decorator: FormeInputDecorationDecorator(
+                        decorationBuilder: (context) =>
+                            const InputDecoration(labelText: 'Rating Bar')),
                     name: 'rating',
                     initialValue: 3,
                     minRating: 1,
@@ -104,15 +105,13 @@ class FormeRatingBarScreen extends FormeScreen {
                 Example(
                   formeKey: key,
                   field: FormeRatingBarIndicator(
-                    decorator:
-                        FormeInputDecoratorBuilder(wrapper: (child, field) {
+                    decorator: FormeInputDecorationDecorator(
+                        childBuilder: (context, child) {
                       return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             child,
                             FormeNumberField(
-                              name: '',
-                              registrable: false,
                               initialValue: 2.3,
                               decimal: 1,
                               max: 5,

@@ -61,9 +61,11 @@ class FormeFileGridScreen extends FormeScreen {
                     pickFiles: (state, max) =>
                         _pick(state, max, ImageSource.gallery),
                     showGridItemRemoveWidget: false,
-                    decorator: FormeInputDecoratorBuilder(
-                        decoration: const InputDecoration(labelText: 'Images'),
-                        wrapper: (child, field) {
+                    decorator: FormeInputDecorationDecorator(
+                        decorationBuilder: (context) =>
+                            const InputDecoration(labelText: 'Images'),
+                        childBuilder: (context, child) {
+                          FormeFieldState field = FormeField.of(context)!;
                           return Column(
                             children: [
                               child,
@@ -169,8 +171,9 @@ class FormeFileGridScreen extends FormeScreen {
                   formeKey: key,
                   field: FormeFileGrid(
                     shrinkWrap: true,
-                    decorator: FormeInputDecoratorBuilder(
-                      wrapper: (child, field) {
+                    decorator: FormeInputDecorationDecorator(
+                      childBuilder: (context, child) {
+                        FormeFieldState field = FormeField.of(context)!;
                         return Column(
                           children: [
                             IconButton(
@@ -240,8 +243,9 @@ class FormeFileGridScreen extends FormeScreen {
                       debugPrintStack(stackTrace: stack);
                     },
                     pickFiles: (state, max) {},
-                    decorator: FormeInputDecoratorBuilder(
-                      wrapper: (child, field) {
+                    decorator: FormeInputDecorationDecorator(
+                      childBuilder: (context, child) {
+                        FormeFieldState field = FormeField.of(context)!;
                         return Column(
                           children: [
                             Builder(builder: (context) {
@@ -261,8 +265,7 @@ class FormeFileGridScreen extends FormeScreen {
                                   IconButton(
                                     onPressed: () async {
                                       (field as FormeFileGridState)
-                                          .retryUpload();
-                                      field.upload();
+                                          .upload(retry: true);
                                       (context as Element).markNeedsBuild();
                                     },
                                     icon: const Icon(Icons.upload),
@@ -378,7 +381,7 @@ class _UploadableXFileFormeImage extends UploadableFormeFile<String> {
   }
 
   @override
-  void cancelUpload() {
+  Future<void> cancelUpload() async {
     _request?.close();
   }
 

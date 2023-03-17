@@ -48,8 +48,9 @@ class FormePinCodeTextFieldScreen extends FormeScreen {
                     validator: (f, v) {
                       return v.length < 6 ? 'pls input all pin code' : null;
                     },
-                    decorator: const FormeInputDecoratorBuilder(
-                        decoration: InputDecoration(labelText: 'Pin Code')),
+                    decorator: FormeInputDecorationDecorator(
+                        decorationBuilder: (context) =>
+                            const InputDecoration(labelText: 'Pin Code')),
                     animationDuration: const Duration(milliseconds: 300),
                     backgroundColor: Colors.blue.shade50,
                     enableActiveFill: true,

@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:forme/forme.dart';
 import 'package:forme_base_fields/forme_base_fields.dart';
 
 import '../cupertino_example.dart';
@@ -17,28 +15,26 @@ class FormeCupertinoDateTimeFieldScreen extends FormeScreen {
                     formeKey: key,
                     name: 'date',
                     title: 'FormeCupertinoDateTimeField',
-                    field: FormeCupertinoDateTimeField(
+                    field: FormeCupertinoDateField(
                       name: 'date',
-                      decorator: const FormeCupertinoInputDecoratorBuilder(
-                        prefix: Padding(
-                          padding: EdgeInsets.only(right: 20),
-                          child: Text('Date'),
-                        ),
-                      ),
+                      triggerBuilder: (state) {
+                        return CupertinoButton(
+                            child: const Text('select'),
+                            onPressed: state.showPicker);
+                      },
                     )),
                 CupertinoExample(
                     formeKey: key,
                     name: 'date-time',
                     title: 'FormeCupertinoDateTimeField2',
-                    field: FormeCupertinoDateTimeField(
+                    field: FormeCupertinoDateField(
                       type: FormeDateTimeType.dateTime,
                       name: 'date-time',
-                      decorator: const FormeCupertinoInputDecoratorBuilder(
-                        prefix: Padding(
-                          padding: EdgeInsets.only(right: 20),
-                          child: Text('Date&Time'),
-                        ),
-                      ),
+                      triggerBuilder: (state) {
+                        return CupertinoButton(
+                            child: const Text('select'),
+                            onPressed: state.showPicker);
+                      },
                     )),
                 CupertinoExample(
                     formeKey: key,
@@ -46,12 +42,11 @@ class FormeCupertinoDateTimeFieldScreen extends FormeScreen {
                     title: 'FormeCupertinoTimerField',
                     field: FormeCupertinoTimerField(
                       name: 'duration',
-                      decorator: const FormeCupertinoInputDecoratorBuilder(
-                        prefix: Padding(
-                          padding: EdgeInsets.only(right: 20),
-                          child: Text('Duration'),
-                        ),
-                      ),
+                      triggerBuilder: (state) {
+                        return CupertinoButton(
+                            child: const Text('select'),
+                            onPressed: state.showPicker);
+                      },
                     )),
               ];
             });

@@ -29,7 +29,7 @@ class _ExampleState extends State<Example> {
     List<Widget> allButton = [
       TextButton(
           onPressed: () {
-            widget.formeKey.field(widget.field.name).reset();
+            widget.formeKey.field(widget.field.name!).reset();
           },
           child: const Text('reset')),
       Tooltip(
@@ -37,7 +37,7 @@ class _ExampleState extends State<Example> {
         textStyle: const TextStyle(color: Colors.orangeAccent),
         child: TextButton(
             onPressed: () {
-              FormeFieldState state = widget.formeKey.field(widget.field.name);
+              FormeFieldState state = widget.formeKey.field(widget.field.name!);
               if (state.hasFocusNode) {
                 state.focusNode.requestFocus();
               }
@@ -49,7 +49,7 @@ class _ExampleState extends State<Example> {
         textStyle: const TextStyle(color: Colors.orangeAccent),
         child: TextButton(
             onPressed: () {
-              FormeFieldState state = widget.formeKey.field(widget.field.name);
+              FormeFieldState state = widget.formeKey.field(widget.field.name!);
 
               if (state.hasFocusNode) {
                 state.focusNode.unfocus();
@@ -65,7 +65,7 @@ class _ExampleState extends State<Example> {
             }
             return TextButton(
                 onPressed: () {
-                  widget.formeKey.field(widget.field.name).readOnly =
+                  widget.formeKey.field(widget.field.name!).readOnly =
                       !status.readOnly;
                 },
                 child: Text(status.readOnly ? 'editable' : 'read-only'));
@@ -80,19 +80,21 @@ class _ExampleState extends State<Example> {
             }
             return TextButton(
                 onPressed: () {
-                  widget.formeKey.field(widget.field.name).enabled =
+                  widget.formeKey.field(widget.field.name!).enabled =
                       !status.enabled;
                 },
                 child: Text(status.enabled ? 'disabled' : 'enabled'));
           }),
       Builder(builder: (context) {
-        if (widget.formeKey.field(widget.field.name).validation ==
+        if (widget.formeKey.field(widget.field.name!).validation ==
             FormeFieldValidation.unnecessary) {
           return const SizedBox.shrink();
         }
         return TextButton(
             onPressed: () {
-              widget.formeKey.field(widget.field.name).validate(quietly: false);
+              widget.formeKey
+                  .field(widget.field.name!)
+                  .validate(quietly: false);
             },
             child: const Text('validate'));
       }),

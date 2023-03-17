@@ -16,22 +16,38 @@ class FormeTimeFieldScreen extends FormeScreen {
                   subTitle: 'select date only',
                   formeKey: key,
                   field: FormeDateTimeField(
-                    decoration: InputDecoration(
-                      labelText: 'Date',
-                      suffixIcon: FormeFieldStatusListener(
-                        builder: (context, status, child) {
-                          if (status != null && status.value != null) {
-                            return IconButton(
-                              onPressed: () {
-                                key.field('dateTime').value = null;
+                    validator: (field, value) {
+                      return 'always error';
+                    },
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    triggerBuilder: (state) {
+                      return InkWell(
+                        focusNode: state.focusNode,
+                        onTap: state.showPicker,
+                        child: InputDecorator(
+                          isFocused: state.hasFocus,
+                          isEmpty: state.value == null,
+                          decoration: InputDecoration(
+                            errorText: state.errorText,
+                            labelText: 'Date',
+                            suffixIcon: FormeFieldStatusListener<DateTime?>(
+                              builder: (context, status, child) {
+                                if (status != null && status.value != null) {
+                                  return IconButton(
+                                    onPressed: () {
+                                      key.field('dateTime').value = null;
+                                    },
+                                    icon: const Icon(Icons.clear),
+                                  );
+                                }
+                                return const SizedBox.shrink();
                               },
-                              icon: const Icon(Icons.clear),
-                            );
-                          }
-                          return const SizedBox.shrink();
-                        },
-                      ),
-                    ),
+                            ),
+                          ),
+                          child: Text('${state.value ?? ''}'),
+                        ),
+                      );
+                    },
                     name: 'dateTime',
                   ),
                   title: 'FormeDateTimeField',
@@ -41,39 +57,44 @@ class FormeTimeFieldScreen extends FormeScreen {
                   formeKey: key,
                   field: FormeDateTimeField(
                     type: FormeDateTimeType.dateTime,
-                    decoration: const InputDecoration(
-                      labelText: 'DateTime',
-                    ),
+                    triggerBuilder: (state) {
+                      return InkWell(
+                        focusNode: state.focusNode,
+                        onTap: state.showPicker,
+                        child: InputDecorator(
+                          isFocused: state.hasFocus,
+                          isEmpty: state.value == null,
+                          decoration: InputDecoration(
+                            errorText: state.errorText,
+                            labelText: 'DateTime',
+                          ),
+                          child: Text('${state.value ?? ''}'),
+                        ),
+                      );
+                    },
                     name: 'dateTime2',
                   ),
                   title: 'FormeDateTimeField2',
                 ),
                 Example(
-                  subTitle: 'custom formatter',
-                  formeKey: key,
-                  field: FormeDateTimeField(
-                    formatter: (type, dateTime) {
-                      switch (type) {
-                        case FormeDateTimeType.date:
-                          return '${dateTime.year.toString()}/${dateTime.month.toString().padLeft(2, '0')}/${dateTime.day.toString().padLeft(2, '0')}';
-                        case FormeDateTimeType.dateTime:
-                          return '${dateTime.year.toString()}/${dateTime.month.toString().padLeft(2, '0')}/${dateTime.day.toString().padLeft(2, '0')} ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
-                      }
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Date',
-                    ),
-                    name: 'dateTime3',
-                  ),
-                  title: 'FormeDateTimeField3',
-                ),
-                Example(
                   subTitle: 'select time only',
                   formeKey: key,
                   field: FormeTimeField(
-                    decoration: const InputDecoration(
-                      labelText: 'Time',
-                    ),
+                    triggerBuilder: (state) {
+                      return InkWell(
+                        focusNode: state.focusNode,
+                        onTap: state.showPicker,
+                        child: InputDecorator(
+                          isFocused: state.hasFocus,
+                          isEmpty: state.value == null,
+                          decoration: InputDecoration(
+                            errorText: state.errorText,
+                            labelText: 'Time',
+                          ),
+                          child: Text('${state.value ?? ''}'),
+                        ),
+                      );
+                    },
                     name: 'time',
                   ),
                   title: 'FormeTimeField',
@@ -81,10 +102,22 @@ class FormeTimeFieldScreen extends FormeScreen {
                 Example(
                   subTitle: 'select date-range',
                   formeKey: key,
-                  field: FormeDateTimeRangeField(
-                    decoration: const InputDecoration(
-                      labelText: 'Date-Time-Range',
-                    ),
+                  field: FormeDateRangeField(
+                    triggerBuilder: (state) {
+                      return InkWell(
+                        focusNode: state.focusNode,
+                        onTap: state.showPicker,
+                        child: InputDecorator(
+                          isFocused: state.hasFocus,
+                          isEmpty: state.value == null,
+                          decoration: InputDecoration(
+                            errorText: state.errorText,
+                            labelText: 'DateRange',
+                          ),
+                          child: Text('${state.value ?? ''}'),
+                        ),
+                      );
+                    },
                     name: 'range',
                   ),
                   title: 'FormeDateTimeRangeField',

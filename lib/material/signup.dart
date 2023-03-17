@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
@@ -25,8 +23,8 @@ class _SignupState extends State<Signup> {
   final List<_PhoneField> phones = [];
 
   TextStyle _getErrorStyle() {
-    final Color color = Theme.of(context).errorColor;
-    return Theme.of(context).textTheme.caption!.copyWith(color: color);
+    final Color color = Theme.of(context).colorScheme.error;
+    return Theme.of(context).textTheme.bodySmall!.copyWith(color: color);
   }
 
   String? phoneNumberValidator(FormeFieldState field, String v) {
@@ -79,8 +77,8 @@ class _SignupState extends State<Signup> {
       {double width = 1}) {
     return (validation?.isInvalid ?? false)
         ? OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Theme.of(context).errorColor, width: width),
+            borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.error, width: width),
           )
         : null;
   }
@@ -201,20 +199,21 @@ class _SignupState extends State<Signup> {
                             }
                             return null;
                           },
-                          decorator: FormeInputDecoratorBuilder(
+                          decorator: FormeInputDecorationDecorator(
                               counter: (s) => s.length,
                               maxLength: 2,
-                              wrapper: (child, field) {
+                              childBuilder: (context, child) {
                                 return Padding(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 10),
                                   child: child,
                                 );
                               },
-                              decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.all(10),
-                                labelText: 'Skill',
-                              )),
+                              decorationBuilder: (context) =>
+                                  const InputDecoration(
+                                    contentPadding: EdgeInsets.all(10),
+                                    labelText: 'Skill',
+                                  )),
                           name: 'skill',
                           items: [
                             FormeChipItem(
@@ -363,12 +362,13 @@ class _SignupState extends State<Signup> {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: FormeCheckboxTile(
                         order: phoneIndex + 8,
-                        decorator: const FormeInputDecoratorBuilder(
-                            decoration: InputDecoration(
-                          isDense: true,
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.zero,
-                        )),
+                        decorator: FormeInputDecorationDecorator(
+                            decorationBuilder: (context) =>
+                                const InputDecoration(
+                                  isDense: true,
+                                  border: InputBorder.none,
+                                  contentPadding: EdgeInsets.zero,
+                                )),
                         name: 'agree',
                         validator: (f, v) {
                           if (!v!) {
@@ -391,7 +391,7 @@ class _SignupState extends State<Signup> {
                                 builder: (context, isValueChanged) {
                               return ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    primary: Colors.orangeAccent),
+                                    backgroundColor: Colors.orangeAccent),
                                 child: const Text('Reset'),
                                 onPressed: isValueChanged
                                     ? () {
@@ -517,7 +517,8 @@ class Avatar extends FormeField<XFile?> {
                               ? null
                               : Border.all(
                                   color: Theme.of(genericState.context)
-                                      .errorColor),
+                                      .colorScheme
+                                      .error),
                         ),
                         child: const Center(child: Icon(Icons.add)),
                       )

@@ -14,12 +14,14 @@ class FormeCupertinoSliderScreen extends FormeScreen {
                   formeKey: key,
                   name: 'slider',
                   title: 'FormeCupertinoSlider',
-                  field: FormeCupertinoSlider(
-                    name: 'slider',
-                    min: 1,
-                    max: 100,
-                    decorator: FormeCupertinoSliderFullWidthDecorator(),
-                  ),
+                  field: Row(children: [
+                    Expanded(
+                        child: FormeCupertinoSlider(
+                      name: 'slider',
+                      min: 1,
+                      max: 100,
+                    ))
+                  ]),
                 ),
               ];
             });
