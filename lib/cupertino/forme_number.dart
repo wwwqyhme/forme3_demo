@@ -18,7 +18,7 @@ class FormeCupertinoNumberTextFieldScreen extends FormeScreen {
                   field: FormeCupertinoNumberField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     name: 'number',
-                    max: 100,
+                    max: 101,
                     validator: FormeValidates.max(100,
                         errorText: 'value can  not bigger than 100'),
                   ),

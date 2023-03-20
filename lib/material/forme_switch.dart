@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forme/forme.dart';
 import 'package:forme_base_fields/forme_base_fields.dart';
 
 import '../example.dart';
@@ -26,6 +27,23 @@ class FormeSwitchScreen extends FormeScreen {
                         child: const Text('off'))
                   ],
                   field: FormeSwitch(
+                    autovalidateMode: AutovalidateMode.always,
+                    decorator: FormeFieldDecoratorBuilder(
+                        buider: (context, child, field) {
+                      return Row(
+                        children: [
+                          child,
+                          field.errorText == null
+                              ? const SizedBox.shrink()
+                              : Text(
+                                  field.errorText!,
+                                  style: TextStyle(
+                                      color:
+                                          Theme.of(context).colorScheme.error),
+                                ),
+                        ],
+                      );
+                    }),
                     name: 'switch',
                     validator: (f, v) {
                       if (!v) return 'turn on pls!';

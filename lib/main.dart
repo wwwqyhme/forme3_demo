@@ -18,6 +18,7 @@ import 'material/forme_time.dart';
 import 'other/forme_async_input_chip.dart';
 import 'other/forme_autocomplete.dart';
 import 'other/forme_file_grid.dart';
+import 'other/forme_fluent.dart';
 import 'other/forme_pin_code.dart';
 import 'other/forme_rating_bar.dart';
 import 'other/forme_spin_number.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Forme Demo',
       theme: ThemeData(
+        useMaterial3: true,
         primarySwatch: Colors.blue,
         inputDecorationTheme: const InputDecorationTheme(
           labelStyle: TextStyle(color: Colors.blueAccent),
@@ -72,7 +74,7 @@ class MyApp extends StatelessWidget {
         '/FormeAutocomplete': (context) => FormeAutocompleteScreen(),
         '/FormeAsyncInputChip': (context) => FormeAsyncInputChipScreen(),
         '/Signup': (context) => const Signup(),
-        // '/Fluent': (context) => const FormeFluent(),
+        '/Fluent': (context) => const FormeFluent(),
       },
     );
   }
