@@ -40,35 +40,6 @@ class _State extends State<FormeFluentPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            FormeFluentCheckbox(
-              decorator: const FormeFluentFormRowDecorator(),
-              initialValue: false,
-              name: 'checkbox',
-              content: FormeFieldStatusListener<bool>(
-                filter: (status) => status.isValueChanged,
-                builder: (context, status, child) {
-                  if (status != null) {
-                    bool? checked = status.value;
-                    return Text(
-                      checked ? 'checked' : 'unchecked',
-                    );
-                  }
-                  return const SizedBox();
-                },
-              ),
-            ),
-            FormeFluentToggleSwitch(
-              name: 'switch',
-              decorator: const FormeFluentFormRowDecorator(),
-              content: FormeFieldStatusListener<bool>(
-                builder: (context, status, child) {
-                  if (status != null) {
-                    return Text(status.value ? 'on' : 'off');
-                  }
-                  return const SizedBox();
-                },
-              ),
-            ),
             FormeFluentTextBox(
               name: 'textBox',
               suffix: Builder(builder: (context) {
@@ -111,45 +82,6 @@ class _State extends State<FormeFluentPage> {
                 });
               },
               placeholder: 'Type your notes here',
-              decorator: const FormeFluentFormRowDecorator(),
-            ),
-            FormeFluentSlider(
-              decorator: const FormeFluentFormRowDecorator(),
-              requestFocusOnUserInteraction: false,
-              name: 'slider',
-              min: 0,
-              max: 100,
-            ),
-            FormeFluentRatingBar(
-              decorator: const FormeFluentFormRowDecorator(),
-              requestFocusOnUserInteraction: false,
-              name: 'rating',
-              ratedIconColor: Colors.red,
-              unratedIconColor: Colors.yellow,
-              amount: 10,
-              initialValue: 0,
-            ),
-            FormeFluentComboBox<String>(
-              name: 'combobox',
-              decorator: const FormeFluentFormRowDecorator(),
-              placeholder: const Text('Selected list item'),
-              items: ['Blue', 'Green', 'Yellow', 'Red']
-                  .map((e) => ComboBoxItem<String>(
-                        value: e,
-                        child: Text(e),
-                      ))
-                  .toList(),
-            ),
-            FormeFluentDatePicker(
-              name: 'date',
-              header: 'Date Picker',
-              initialValue: DateTime.now(),
-              decorator: const FormeFluentFormRowDecorator(),
-            ),
-            FormeFluentTimePicker(
-              name: 'time',
-              header: 'Time Picker',
-              initialValue: DateTime.now(),
               decorator: const FormeFluentFormRowDecorator(),
             ),
             FormeFluentAutoSuggestBox(

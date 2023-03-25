@@ -114,7 +114,7 @@ packages:
     source: hosted
     version: "4.6.1"
   fluent_ui:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: fluent_ui
       sha256: "29d85b74ee8d051bed9b5234afd50af4a693fef91f4e79657644051c23d789fb"
@@ -168,31 +168,35 @@ packages:
   forme:
     dependency: "direct main"
     description:
-      path: "../forme/forme"
-      relative: true
-    source: path
-    version: "4.3.0-beta"
+      name: forme
+      sha256: "119d3a1d5e434fb07c37827f625849181bb9d0c2b6e7523323d925e7866275cb"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.3.0"
   forme_base_fields:
     dependency: "direct main"
     description:
-      path: "../forme/forme_base_fields"
-      relative: true
-    source: path
-    version: "3.0.0-beta"
+      name: forme_base_fields
+      sha256: "249f72a760c60029b12a6eda544c24f38e7b861dbdc6e5f1cc30f9914951ec29"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
   forme_fields:
     dependency: "direct main"
     description:
-      path: "../forme/forme_fields"
-      relative: true
-    source: path
-    version: "3.0.0-beta"
+      name: forme_fields
+      sha256: d40d33cff4644527f4c1724ec1846d140d477bdc49a88479c805d755a6550010
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
   forme_file_picker:
     dependency: "direct main"
     description:
-      path: "../forme/forme_file_picker"
-      relative: true
-    source: path
-    version: "3.1.0-beta"
+      name: forme_file_picker
+      sha256: f834733abef1f534b3c3d805436c2daf5c1e1085277b783d0d974d47c29fe70b
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.1.0"
   forme_fluent:
     dependency: "direct main"
     description:

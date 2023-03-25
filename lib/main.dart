@@ -1,4 +1,12 @@
+import 'package:fluent_ui/fluent_ui.dart' as f;
+import 'package:fluent_ui/l10n/generated/fluent_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:forme_demo/fluent/forme_checkbox.dart';
+import 'package:forme_demo/fluent/forme_combobox.dart';
+import 'package:forme_demo/fluent/forme_fluent_datepicker.dart';
+import 'package:forme_demo/fluent/forme_rating_bar.dart';
+import 'package:forme_demo/fluent/forme_slider.dart';
+import 'package:forme_demo/fluent/forme_textbox.dart';
 import 'cupertino/forme_datetime.dart';
 import 'cupertino/forme_number.dart';
 import 'cupertino/forme_picker.dart';
@@ -6,6 +14,7 @@ import 'cupertino/forme_segmented_control.dart';
 import 'cupertino/forme_slider.dart';
 import 'cupertino/forme_switch.dart';
 import 'cupertino/forme_textfield.dart';
+import 'fluent/forme_toggle_switch.dart';
 import 'material/signup.dart';
 import 'material/forme_checkbox.dart';
 import 'material/forme_chip.dart';
@@ -18,7 +27,6 @@ import 'material/forme_time.dart';
 import 'other/forme_async_input_chip.dart';
 import 'other/forme_autocomplete.dart';
 import 'other/forme_file_grid.dart';
-import 'other/forme_fluent.dart';
 import 'other/forme_pin_code.dart';
 import 'other/forme_rating_bar.dart';
 import 'other/forme_spin_number.dart';
@@ -38,6 +46,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Forme Demo',
+      localizationsDelegates: FluentLocalizations.localizationsDelegates,
+      supportedLocales: FluentLocalizations.supportedLocales,
       theme: ThemeData(
         useMaterial3: true,
         primarySwatch: Colors.blue,
@@ -73,8 +83,15 @@ class MyApp extends StatelessWidget {
         '/FormeFileGrid': (context) => FormeFileGridScreen(),
         '/FormeAutocomplete': (context) => FormeAutocompleteScreen(),
         '/FormeAsyncInputChip': (context) => FormeAsyncInputChipScreen(),
+        '/FormeFluentCheckbox': (context) => FormeFluentCheckBoxScreen(),
+        '/FormeFluentToggleSwitch': (context) =>
+            FormeFluentToggleSwitchScreen(),
+        '/FormeFluentSlider': (context) => FormeFluentSliderScreen(),
+        '/FormeFluentRatingBar': (context) => FormeFluentRatingBarScreen(),
+        '/FormeFluentCombobox': (context) => FormeFluentComboboxScreen(),
+        '/FormeFluentDatePicker': (context) => FormeFluentDateScreen(),
+        '/FormeFluentTextBox': (context) => FormeFluentTextBoxScreen(),
         '/Signup': (context) => const Signup(),
-        '/Fluent': (context) => const FormeFluent(),
       },
     );
   }
@@ -82,15 +99,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -108,23 +116,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
           children: [
             const ExpansionTile(
               title: Text(
@@ -192,6 +190,35 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const ExpansionTile(
               title: Text(
+                "Fluent Fields",
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+              ),
+              children: <Widget>[
+                ListTile(
+                  title: FieldLink('FormeFluentCheckbox'),
+                ),
+                ListTile(
+                  title: FieldLink('FormeFluentToggleSwitch'),
+                ),
+                ListTile(
+                  title: FieldLink('FormeFluentSlider'),
+                ),
+                ListTile(
+                  title: FieldLink('FormeFluentRatingBar'),
+                ),
+                ListTile(
+                  title: FieldLink('FormeFluentCombobox'),
+                ),
+                ListTile(
+                  title: FieldLink('FormeFluentDatePicker'),
+                ),
+                ListTile(
+                  title: FieldLink('FormeFluentTextBox'),
+                ),
+              ],
+            ),
+            const ExpansionTile(
+              title: Text(
                 "Other Fields",
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
@@ -218,9 +245,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const ListTile(
               title: FieldLink('Signup'),
-            ),
-            const ListTile(
-              title: FieldLink('Fluent'),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
