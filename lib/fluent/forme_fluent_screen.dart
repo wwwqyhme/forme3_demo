@@ -41,10 +41,18 @@ class FormeScreenState extends State<FormeFluentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return FluentTheme(
-      data: FluentThemeData(),
-      child: NavigationView(
+    return FluentApp(
+      theme: FluentThemeData(),
+      home: NavigationView(
         appBar: NavigationAppBar(
+          leading: IconButton(
+              icon: const Icon(
+                FluentIcons.back,
+                size: 14,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              }),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,11 +65,7 @@ class FormeScreenState extends State<FormeFluentScreen> {
                     },
                     icon: const Icon(FluentIcons.source)),
               Expanded(
-                child: Button(
-                    child: Text('??'),
-                    onPressed: () {
-                      Navigator.of(context).popAndPushNamed('/');
-                    }),
+                child: Text(widget.title),
               )
             ],
           ),

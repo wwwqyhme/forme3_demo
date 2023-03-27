@@ -1,4 +1,3 @@
-import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:fluent_ui/l10n/generated/fluent_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:forme_demo/fluent/forme_checkbox.dart';

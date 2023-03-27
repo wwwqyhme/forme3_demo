@@ -322,7 +322,7 @@ void _pick(
     XFile? xFile = await picker.pickImage(source: source);
     images = xFile == null ? [] : [toXFileImage(xFile)];
   } else {
-    images = (await picker.pickMultiImage() ?? []).map((e) {
+    images = (await picker.pickMultiImage()).map((e) {
       return toXFileImage(e);
     }).toList();
   }
